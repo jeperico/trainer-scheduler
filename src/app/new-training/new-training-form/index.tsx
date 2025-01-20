@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import FormArea from '@/components/FormArea';
 import { useForm } from 'react-hook-form';
@@ -18,6 +18,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AddExercise from './add-exercise';
+import IExercise from '@/interfaces/exercise';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import DeleteExercise from './delete-exercise';
 
 interface NewTrainingFormProps {
   handleTraining: (data: TrainingSchema) => void;
@@ -83,6 +87,35 @@ export type TrainingSchema = z.infer<typeof trainingSchema>;
 const NewTrainingForm: React.FC<NewTrainingFormProps> = ({
   handleTraining,
 }) => {
+  const [exercises, setExercises] = useState<IExercise[]>([]);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [objectives, setObjectives] = useState<string>('');
+  const [duration, setDuration] = useState<number>(0);
+
+  const handleExercise = () => {
+    setExercises([
+      ...exercises,
+      {
+        title: title,
+        description: description,
+        objectives: objectives,
+        duration: duration,
+      },
+    ]);
+    setTitle('');
+    setDescription('');
+    setObjectives('');
+    setDuration(0);
+  };
+
+  const deleteExercise = (index: number) => {
+    return () => {
+      const newExercises = exercises.filter((_, i) => i !== index);
+      setExercises(newExercises);
+    };
+  };
+
   const {
     register,
     handleSubmit,
@@ -137,14 +170,48 @@ const NewTrainingForm: React.FC<NewTrainingFormProps> = ({
         </div>
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="data">Exercícios:</Label>
-          <AddExercise register={register} errors={errors.team}></AddExercise>
-          {/* <ul>
-            {exercises.map((exercise, index) => (
-              <li key={index}>
-                <strong>{exercise.name}</strong>: {exercise.notes}
-              </li>
-            ))}
-          </ul> */}
+          <AddExercise
+            register={register}
+            errors={errors.exercises?.[0]}
+            groupedSetters={{
+              title: setTitle,
+              description: setDescription,
+              objectives: setObjectives,
+              duration: setDuration,
+            }}
+            groupedGetters={{
+              title: title,
+              description: description,
+              objectives: objectives,
+              duration: duration,
+            }}
+            handleExercise={handleExercise}
+          ></AddExercise>
+          {exercises.length > 0 && (
+            <ScrollArea className="my-4 rounded-md border">
+              <div className="p-4">
+                <h4 className="mb-4 text-sm font-medium leading-none">
+                  Atividades
+                </h4>
+                {exercises.map((exercise, index) => (
+                  <div key={index} className="text-sm">
+                    <div className="flex justify-between items-center">
+                      <p>
+                        <strong>
+                          {exercise.duration} Min -{' ' + exercise.title}
+                        </strong>
+                      </p>
+                      <DeleteExercise
+                        deleteExercise={deleteExercise}
+                        index={index}
+                      />
+                    </div>
+                    <Separator className="my-2" />
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          )}
         </div>
       </div>
     </FormArea>

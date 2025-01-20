@@ -9,10 +9,11 @@ interface InputProps extends React.ComponentProps<'input'> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   errors: FieldError | undefined;
+  required?: boolean; // Add the optional required prop
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, name, register, errors, ...props }, ref) => {
+  ({ className, type, name, register, errors, required, ...props }, ref) => {
     return (
       <div>
         <input
@@ -22,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className,
             errors ? 'border-red-500' : '' // Add a class if there are errors
           )}
-          {...register(name)}
+          {...register(name, { required })}
           {...props}
         />
         {errors && (

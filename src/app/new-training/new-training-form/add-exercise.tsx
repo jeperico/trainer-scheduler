@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -10,39 +11,43 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import React, { useState } from 'react';
+import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import IExercise from '@/interfaces/exercise';
+
+interface IGroupedSetters {
+  title: React.Dispatch<React.SetStateAction<string>>;
+  description: React.Dispatch<React.SetStateAction<string>>;
+  objectives: React.Dispatch<React.SetStateAction<string>>;
+  duration: React.Dispatch<React.SetStateAction<number>>;
+}
 
 interface AddExerciseProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   errors: any;
+  groupedSetters: IGroupedSetters;
+  groupedGetters: IExercise;
+  handleExercise: () => void;
 }
 
-const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
-  const [exercises, setExercises] = useState<IExercise[]>([]);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [objectives, setObjectives] = useState('');
-  const [duration, setDuration] = useState(0);
-
-  const handleExercise = () => {
-    setExercises([
-      ...exercises,
-      {
-        title: title,
-        description: description,
-        objectives: objectives,
-        duration: duration,
-      },
-    ]);
-    setTitle('');
-    setDescription('');
-    setObjectives('');
-    setDuration(0);
+const AddExercise: React.FC<AddExerciseProps> = ({
+  register,
+  errors,
+  groupedSetters,
+  groupedGetters,
+  handleExercise,
+}) => {
+  const handleSetter = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    setter: keyof IGroupedSetters
+  ) => {
+    console.log('errors', errors);
+    return setter === 'duration'
+      ? groupedSetters[setter](Number(e.target.value))
+      : groupedSetters[setter](e.target.value);
   };
 
   return (
@@ -65,9 +70,11 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
                 id="title"
                 name="title"
                 type="text"
+                value={groupedGetters.title}
                 register={register}
                 errors={errors?.title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => handleSetter(e, 'title')}
+                required
               />
             </div>
             <div className="flex flex-col space-y-1.5 w-60">
@@ -76,9 +83,11 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
                 id="duration"
                 name="duration"
                 type="number"
+                value={groupedGetters.duration}
                 register={register}
                 errors={errors?.duration}
-                onChange={(e) => setDuration(Number(e.target.value))}
+                onChange={(e) => handleSetter(e, 'duration')}
+                required
               />
             </div>
           </div>
@@ -87,28 +96,33 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
             <Textarea
               id="description"
               name="description"
+              value={groupedGetters.description}
               placeholder="Descrição do exercício"
               register={register}
               errors={errors?.description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => handleSetter(e, 'description')}
+              required
             />
           </div>
           <div className="flex flex-col space-y-1.5">
-            <Label htmlFor="objective">Objetivo</Label>
+            <Label htmlFor="objectives">Objetivo</Label>
             <Textarea
-              id="objective"
-              name="objective"
+              id="objectives"
+              name="objectives"
+              value={groupedGetters.objectives}
               placeholder="Objetivo do treino"
               register={register}
-              errors={errors?.objective}
-              onChange={(e) => setObjectives(e.target.value)}
+              errors={errors?.objectives}
+              onChange={(e) => handleSetter(e, 'objectives')}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="button" onClick={handleExercise}>
-            Adicionar
-          </Button>
+          <DialogClose asChild>
+            <Button type="button" onClick={handleExercise}>
+              Adicionar
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
