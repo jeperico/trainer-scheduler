@@ -10,9 +10,10 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import React from 'react';
+import React, { useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
+import IExercise from '@/interfaces/exercise';
 
 interface AddExerciseProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,6 +23,28 @@ interface AddExerciseProps {
 }
 
 const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
+  const [exercises, setExercises] = useState<IExercise[]>([]);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [objectives, setObjectives] = useState('');
+  const [duration, setDuration] = useState(0);
+
+  const handleExercise = () => {
+    setExercises([
+      ...exercises,
+      {
+        title: title,
+        description: description,
+        objectives: objectives,
+        duration: duration,
+      },
+    ]);
+    setTitle('');
+    setDescription('');
+    setObjectives('');
+    setDuration(0);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -44,6 +67,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
                 type="text"
                 register={register}
                 errors={errors?.title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className="flex flex-col space-y-1.5 w-60">
@@ -54,6 +78,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
                 type="number"
                 register={register}
                 errors={errors?.duration}
+                onChange={(e) => setDuration(Number(e.target.value))}
               />
             </div>
           </div>
@@ -65,6 +90,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
               placeholder="Descrição do exercício"
               register={register}
               errors={errors?.description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="flex flex-col space-y-1.5">
@@ -75,11 +101,12 @@ const AddExercise: React.FC<AddExerciseProps> = ({ register, errors }) => {
               placeholder="Objetivo do treino"
               register={register}
               errors={errors?.objective}
+              onChange={(e) => setObjectives(e.target.value)}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="button" onClick={() => {}}>
+          <Button type="button" onClick={handleExercise}>
             Adicionar
           </Button>
         </DialogFooter>
