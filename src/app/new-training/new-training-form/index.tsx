@@ -137,7 +137,7 @@ const NewTrainingForm: React.FC<NewTrainingFormProps> = ({
         </div>
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="data">Exercícios:</Label>
-          <AddExercise register={register} errors={errors.date}></AddExercise>
+          <AddExercise register={register} errors={errors.team}></AddExercise>
           {/* <ul>
             {exercises.map((exercise, index) => (
               <li key={index}>

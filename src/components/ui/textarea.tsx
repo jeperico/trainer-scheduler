@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form'; // Import the necessary types
 
@@ -11,7 +12,7 @@ interface TextAreaProps extends React.ComponentProps<'textarea'> {
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, name, register, errors, ...props }) => {
+  ({ className, name, register, errors, ...props }, ref) => {
     return (
       <>
         <textarea

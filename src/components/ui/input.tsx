@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form'; // Import the necessary types
 
@@ -11,7 +12,7 @@ interface InputProps extends React.ComponentProps<'input'> {
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, name, register, errors, ...props }) => {
+  ({ className, type, name, register, errors, ...props }, ref) => {
     return (
       <div>
         <input

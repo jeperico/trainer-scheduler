@@ -7,13 +7,12 @@
 // } from '@/components/ui/dialog';
 // import { Label } from '@/components/ui/label';
 // import { Input } from '@/components/ui/input';
-// import React from 'react';
+// import React, { useState } from 'react';
 // import { z } from 'zod';
 // import { Button } from '@/components/ui/button';
-// import { zodResolver } from '@hookform/resolvers/zod';
-// import { useForm } from 'react-hook-form';
 // import { DialogHeader, DialogFooter } from '@/components/ui/dialog';
-// import { title } from 'process';
+// import { Textarea } from '@/components/ui/textarea';
+// import IExercise from '@/interfaces/exercise';
 
 // interface AddExerciseProps {
 //   handleExercise: (data: ExerciseSchema) => void;
@@ -38,13 +37,27 @@
 // export type ExerciseSchema = z.infer<typeof exerciseSchema>;
 
 // const AddExercise: React.FC<AddExerciseProps> = ({ handleExercise }) => {
-//   const {
-//     // register,
-//     // handleSubmit,
-//     // formState: { errors },
-//   } = useForm<ExerciseSchema>({
-//     resolver: zodResolver(exerciseSchema),
-//   });
+//   const [exercises, setExercises] = useState<IExercise[]>([]);
+//   const [title, setTitle] = useState('');
+//   const [description, setDescription] = useState('');
+//   const [objectives, setObjectives] = useState('');
+//   const [duration, setDuration] = useState(0);
+
+//   const handleExercise = () => {
+//     setExercises([
+//       ...exercises,
+//       {
+//         title: title,
+//         description: description,
+//         objectives: objectives,
+//         duration: duration,
+//       },
+//     ]);
+//     setTitle('');
+//     setDescription('');
+//     setObjectives('');
+//     setDuration(0);
+//   };
 
 //   return (
 //     <Dialog>
@@ -64,15 +77,15 @@
 //             <Input
 //               id="title"
 //               value={title}
-//               // onChange={(e) => setTitle(e.target.value)}
+//               onChange={(e) => setTitle(e.target.value)}
 //               className="col-span-3"
 //             />
 //           </div>
 //         </div>
 //         <DialogFooter>
-//           {/* <Button type="button" onClick={handleExercise}>
+//           <Button type="button" onClick={handleExercise}>
 //             Adicionar
-//           </Button> */}
+//           </Button>
 //         </DialogFooter>
 //       </DialogContent>
 //     </Dialog>
