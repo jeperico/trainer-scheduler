@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "prettier . --write && eslint . --fix .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest"
   },
   "dependencies": {
     "next": "15.1.5",
@@ -15,10 +16,14 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.18.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "babel-jest": "^29.7.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-react": "^7.37.4",
