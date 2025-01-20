@@ -1,0 +1,82 @@
+// import {
+//   Dialog,
+//   DialogTrigger,
+//   DialogContent,
+//   DialogTitle,
+//   DialogDescription,
+// } from '@/components/ui/dialog';
+// import { Label } from '@/components/ui/label';
+// import { Input } from '@/components/ui/input';
+// import React from 'react';
+// import { z } from 'zod';
+// import { Button } from '@/components/ui/button';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { useForm } from 'react-hook-form';
+// import { DialogHeader, DialogFooter } from '@/components/ui/dialog';
+// import { title } from 'process';
+
+// interface AddExerciseProps {
+//   handleExercise: (data: ExerciseSchema) => void;
+// }
+
+// const exerciseSchema = z.object({
+//   title: z.string().min(2, {
+//     message: 'O título deve ter no mínimo 2 caracteres',
+//   }),
+//   description: z.string().min(3, {
+//     message: 'A descrição deve ter no mínimo 3 caracteres',
+//   }),
+//   objectives: z.string(),
+//   duration: z
+//     .number()
+//     .min(1, {
+//       message: 'A duração deve ser de no mínimo 1 minuto',
+//     })
+//     .max(120, { message: 'A duração deve ser de no máximo 120 minutos' }),
+// });
+
+// export type ExerciseSchema = z.infer<typeof exerciseSchema>;
+
+// const AddExercise: React.FC<AddExerciseProps> = ({ handleExercise }) => {
+//   const {
+//     // register,
+//     // handleSubmit,
+//     // formState: { errors },
+//   } = useForm<ExerciseSchema>({
+//     resolver: zodResolver(exerciseSchema),
+//   });
+
+//   return (
+//     <Dialog>
+//       <DialogTrigger asChild>
+//         <Button variant="outline">Adicionar Exercício</Button>
+//       </DialogTrigger>
+//       <DialogContent className="sm:max-w-[425px]">
+//         <DialogHeader>
+//           <DialogTitle>Adicionar Exercício</DialogTitle>
+//           <DialogDescription>
+//             Adicione os detalhes do exercício abaixo.
+//           </DialogDescription>
+//         </DialogHeader>
+//         <div className="">
+//           <div>
+//             <Label htmlFor="title">Título</Label>
+//             <Input
+//               id="title"
+//               value={title}
+//               // onChange={(e) => setTitle(e.target.value)}
+//               className="col-span-3"
+//             />
+//           </div>
+//         </div>
+//         <DialogFooter>
+//           {/* <Button type="button" onClick={handleExercise}>
+//             Adicionar
+//           </Button> */}
+//         </DialogFooter>
+//       </DialogContent>
+//     </Dialog>
+//   );
+// };
+
+// export default AddExercise;

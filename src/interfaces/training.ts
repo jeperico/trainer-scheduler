@@ -1,14 +1,9 @@
-import { Locale } from '@/types/locale';
-import IExercise from './exercise';
-import { Time } from '@/types/time';
+import IExercise from '@/interfaces/exercise';
+import ITeam from '@/interfaces/team';
 
 export default interface ITraining {
-  team: string;
-  month: string;
+  team: ITeam;
   objective: string;
-  location: Locale;
   date: Date;
-  startTime: Time;
-  endTime: Time;
-  data: Array<IExercise>;
+  exercises: Array<IExercise>;
 }
