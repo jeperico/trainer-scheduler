@@ -62,7 +62,9 @@ const trainingSchema = z.object({
   objective: z.string().min(3, {
     message: 'O objetivo deve ter no mínimo 3 caracteres',
   }),
-  date: z.date(),
+  date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'A data deve estar no formato YYYY-MM-DD'),
   exercises: z.array(
     z.object({
       title: z.string().min(2, {

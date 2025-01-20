@@ -20,21 +20,21 @@ interface IFormAreaProps {
 const FormArea: React.FC<IFormAreaProps> = ({ children, onSubmit }) => {
   return (
     <main className="w-screen h-screen flex items-center justify-center">
-      <Card className="w-[444px]">
-        <CardHeader className="flex items-center">
-          <CardTitle>Cadastrar Treino</CardTitle>
-          <CardDescription>
-            Cadastre as atividades dos próximos treinos.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={onSubmit}>{children}</form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button>
-        </CardFooter>
-      </Card>
+      <form onSubmit={() => onSubmit}>
+        <Card className="w-[444px]">
+          <CardHeader className="flex items-center">
+            <CardTitle>Cadastrar Treino</CardTitle>
+            <CardDescription>
+              Cadastre as atividades dos próximos treinos.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>{children}</CardContent>
+          <CardFooter className="flex justify-between">
+            <Button variant="outline">Cancel</Button>
+            <Button>Cadastrar</Button>
+          </CardFooter>
+        </Card>
+      </form>
     </main>
   );
 };

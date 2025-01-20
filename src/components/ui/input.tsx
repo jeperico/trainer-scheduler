@@ -10,10 +10,14 @@ interface InputProps extends React.ComponentProps<'input'> {
   register: UseFormRegister<any>;
   errors: FieldError | undefined;
   required?: boolean; // Add the optional required prop
+  isDate?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, name, register, errors, required, ...props }, ref) => {
+  (
+    { className, type, name, register, errors, required, isDate, ...props },
+    ref
+  ) => {
     return (
       <div>
         <input
@@ -23,7 +27,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className,
             errors ? 'border-red-500' : '' // Add a class if there are errors
           )}
-          {...register(name, { required })}
+          {...register(
+            name,
+            isDate ? { valueAsDate: true, required } : { required }
+          )}
           {...props}
         />
         {errors && (
