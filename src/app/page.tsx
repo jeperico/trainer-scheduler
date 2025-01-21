@@ -3,24 +3,32 @@
 import TrainingCard from '@/components/TrainingCard';
 import ITraining from '@/interfaces/training';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
-  const data = [
+  const data: Array<ITraining> = [
     {
+      id: uuidv4(),
       team: {
         name: 'Iniciante',
         gender: 'Feminino',
         day: [
           {
-            weekday: 'monday',
-            startTime: '10:00',
-            endTime: '11:30',
+            weekday: 3,
+            startTime: {
+              hours: 10,
+              minutes: 0,
+            },
+            endTime: {
+              hours: 11,
+              minutes: 30,
+            },
           },
         ],
-        location: 'Costa e Silva',
+        location: 'Bucarein',
       },
       objective: 'O objetivo deve ter no mínimo 3 caracteres',
-      date: 'YYYY-MM-DD',
+      date: new Date(),
       exercises: [
         {
           title: 'Manchetão',
@@ -31,20 +39,27 @@ const Home = () => {
       ],
     },
     {
+      id: uuidv4(),
       team: {
         name: 'Intermediário',
         gender: 'Masculino',
         day: [
           {
-            weekday: 'sunday',
-            startTime: '11:00',
-            endTime: '12:30',
+            weekday: 0,
+            startTime: {
+              hours: 11,
+              minutes: 0,
+            },
+            endTime: {
+              hours: 12,
+              minutes: 30,
+            },
           },
         ],
-        location: 'Guanabara',
+        location: 'Bucarein',
       },
       objective: 'O objetivo deve ter no mínimo 3 caracteres',
-      date: 'YYYY-MM-DD',
+      date: new Date(),
       exercises: [
         {
           title: 'Manchetão',
@@ -61,20 +76,27 @@ const Home = () => {
       ],
     },
     {
+      id: uuidv4(),
       team: {
         name: 'Competição',
         gender: 'Feminino',
         day: [
           {
-            weekday: 'friday',
-            startTime: '15:00',
-            endTime: '16:30',
+            weekday: 5,
+            startTime: {
+              hours: 15,
+              minutes: 0,
+            },
+            endTime: {
+              hours: 16,
+              minutes: 30,
+            },
           },
         ],
         location: 'Itaum',
       },
       objective: 'O objetivo deve ter no mínimo 3 caracteres',
-      date: 'YYYY-MM-DD',
+      date: new Date(),
       exercises: [
         {
           title: 'Manchetão',
@@ -129,42 +151,6 @@ const Home = () => {
         })}
       </main>
     </>
-    // <div className="container mx-auto p-4">
-    //   {addComponents().map((training: ITraining, index: number) => {
-    //     return (
-    //       <div key={index} className="bg-white shadow-md rounded-lg p-6 mb-4">
-    //         <h3 className="text-xl font-bold mb-2">
-    //           Time: {training.team.name}
-    //         </h3>
-    //         <p className="text-gray-700 mb-1">Gênero: {training.team.gender}</p>
-    //         <p className="text-gray-700 mb-1">
-    //           Local: {training.team.location.toString()}
-    //         </p>
-    //         <p className="text-gray-700 mb-1">Objetivo: {training.objective}</p>
-    //         <p className="text-gray-700 mb-1">
-    //           Data: {training.date.toString()}
-    //         </p>
-    //         <h4 className="text-lg font-semibold mt-4 mb-2">Exercícios:</h4>
-    //         {training.exercises.map((exercise: IExercise, index: number) => {
-    //           return (
-    //             <div key={index} className="bg-gray-100 p-4 rounded-lg mb-2">
-    //               <p className="text-gray-800 mb-1">Nome: {exercise.title}</p>
-    //               <p className="text-gray-800 mb-1">
-    //                 Descrição: {exercise.description}
-    //               </p>
-    //               <p className="text-gray-800 mb-1">
-    //                 Objetivos: {exercise.objectives}
-    //               </p>
-    //               <p className="text-gray-800 mb-1">
-    //                 Duração: {exercise.duration}
-    //               </p>
-    //             </div>
-    //           );
-    //         })}
-    //       </div>
-    //     );
-    //   })}
-    // </div>
   );
 };
 

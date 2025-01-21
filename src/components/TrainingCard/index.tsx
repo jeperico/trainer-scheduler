@@ -17,19 +17,43 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../ui/accordion';
+import Link from 'next/link';
 
 interface TrainingCardProps {
   data: ITraining;
 }
 
 const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
+  const formatTime = (hours: number, minutes: number) => {
+    const formattedHours = hours < 10 ? `0${hours}` : hours;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${formattedHours}:${formattedMinutes}`;
+  };
+
+  const formatDay = (date: Date) => {
+    const newDate = new Date(date);
+
+    const day = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
+  };
+
+  const startTime = formatTime(
+    data.team.day[0].startTime.hours,
+    data.team.day[0].startTime.minutes
+  );
+  const endTime = formatTime(
+    data.team.day[0].endTime.hours,
+    data.team.day[0].endTime.minutes
+  );
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
         <CardTitle>{`${data.team.name} ${data.team.gender}, ${data.team.location}`}</CardTitle>
         <Separator />
         <CardDescription>
-          {`${data.date} - ${data.team.day[0].startTime} ${data.team.day[0].endTime}`}
+          {`[${formatDay(data.date)}] ${startTime} até ${endTime}.`}
         </CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
@@ -62,7 +86,9 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
       </CardContent>
       <CardFooter className="flex justify-between mt-auto">
         <Button variant="destructive">Excluir</Button>
-        <Button>Editar</Button>
+        <Button asChild>
+          <Link href={`/new-training?id=${data.id}`}>Editar</Link>
+        </Button>
         <Button variant="outline">Copiar</Button>
       </CardFooter>
     </Card>

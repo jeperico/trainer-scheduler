@@ -1,5 +1,5 @@
 import { Time } from '@/types/time';
-import { Locale } from 'date-fns';
+import { Locale } from '@/types/locale';
 
 export enum Weekday {
   sunday = 0,
