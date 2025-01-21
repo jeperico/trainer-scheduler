@@ -1,0 +1,35 @@
+import React from 'react';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+} from '@/components/ui/navigation-menu';
+
+interface NavMenuProps {
+  title: string;
+  filters: Array<string>;
+}
+
+const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid gap-3 p-4 w-[420px]">
+              {filters.map((filter) => (
+                <NavigationMenuLink key={filter}>{filter}</NavigationMenuLink>
+              ))}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  );
+};
+
+export default NavMenu;
