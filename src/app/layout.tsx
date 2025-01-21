@@ -3,12 +3,15 @@
 import React from 'react';
 import { Suspense } from 'react';
 import '@/styles/global.css';
+import { usePathname } from 'next/navigation';
+import Header from '@/layout/Header';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   return (
     <html suppressHydrationWarning lang="en">
       <head />
@@ -20,6 +23,7 @@ export default function RootLayout({
             </div>
           }
         >
+          {pathname === '/new-training' ? null : <Header />}
           {children}
         </Suspense>
       </body>
