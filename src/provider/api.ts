@@ -20,8 +20,14 @@ export const post = (uri: string, data: object) => {
   return [];
 };
 
-export const getTeam = (name: string) => {
+export const getTeamByName = (name: string) => {
   const teams = get('teams-data');
 
   return teams.find((team: ITeam) => team.name === name);
+};
+
+export const getTeamById = (id: string) => {
+  const teams = get('teams-data');
+
+  return teams.find((team: ITeam) => team.id === id);
 };

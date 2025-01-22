@@ -16,17 +16,14 @@ import { UseFormRegister } from 'react-hook-form';
 interface SelectTeamProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
+  handleSelect: (e: string) => void;
 }
 
-const SelectTeam: React.FC<SelectTeamProps> = ({ register }) => {
+const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
   const fetchTeams = (gender: string) => {
     const teams = get('teams-data');
 
     return teams.filter((team: ITeam) => team.gender === gender);
-  };
-
-  const handleSelect = (e: string) => {
-    console.log(e);
   };
 
   return (

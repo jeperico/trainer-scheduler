@@ -14,6 +14,7 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-training-form/delete-exercise';
 import SelectTeam from './new-training-form/select-team';
+import { getTeamById } from '@/provider/api';
 
 const trainingSchema = z.object({
   team: z.object({
@@ -110,6 +111,14 @@ const NewTraining = () => {
     localStorage.setItem('training-data', JSON.stringify(data));
   };
 
+  const handleSelect = (e: string) => {
+    console.log(getTeamById(e));
+    register('team', {
+      required: 'Selecione uma equipe',
+      value: getTeamById(e),
+    });
+  };
+
   const {
     register,
     handleSubmit,
@@ -121,7 +130,7 @@ const NewTraining = () => {
     <FormArea onSubmit={handleSubmit(handleTraining)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <SelectTeam register={register} />
+          <SelectTeam register={register} handleSelect={handleSelect} />
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
             <Input

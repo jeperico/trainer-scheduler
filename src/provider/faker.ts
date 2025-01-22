@@ -1,12 +1,12 @@
 import ITeam from '@/interfaces/team';
 import ITraining from '@/interfaces/training';
-import { get, getTeam, post } from '@/provider/api';
+import { get, getTeamByName, post } from '@/provider/api';
 import { v4 as uuidv4 } from 'uuid';
 
 const trainingData: Array<ITraining> = [
   {
     id: '91bd569e-1730-4cc3-bd15-3e6119e37cbb',
-    team: getTeam('Baby Iniciante'),
+    team: getTeamByName('Baby Iniciante'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -20,42 +20,10 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: getTeam('Iniciante Bucarein'),
+    team: getTeamByName('Iniciante Bucarein'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
-      {
-        title: 'Manchetão',
-        description: 'A descrição deve ter no mínimo 3 caracteres',
-        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
-        duration: 25,
-      },
-      {
-        title: 'Manchetão',
-        description: 'A descrição deve ter no mínimo 3 caracteres',
-        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
-        duration: 25,
-      },
-    ],
-  },
-  {
-    id: uuidv4(),
-    team: getTeam('Sub 18'),
-    objective: 'O objetivo deve ter no mínimo 3 caracteres',
-    date: new Date(),
-    exercises: [
-      {
-        title: 'Manchetão',
-        description: 'A descrição deve ter no mínimo 3 caracteres',
-        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
-        duration: 25,
-      },
-      {
-        title: 'Manchetão',
-        description: 'A descrição deve ter no mínimo 3 caracteres',
-        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
-        duration: 25,
-      },
       {
         title: 'Manchetão',
         description: 'A descrição deve ter no mínimo 3 caracteres',
@@ -72,7 +40,39 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: getTeam('Rendimento'),
+    team: getTeamByName('Sub 18'),
+    objective: 'O objetivo deve ter no mínimo 3 caracteres',
+    date: new Date(),
+    exercises: [
+      {
+        title: 'Manchetão',
+        description: 'A descrição deve ter no mínimo 3 caracteres',
+        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
+        duration: 25,
+      },
+      {
+        title: 'Manchetão',
+        description: 'A descrição deve ter no mínimo 3 caracteres',
+        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
+        duration: 25,
+      },
+      {
+        title: 'Manchetão',
+        description: 'A descrição deve ter no mínimo 3 caracteres',
+        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
+        duration: 25,
+      },
+      {
+        title: 'Manchetão',
+        description: 'A descrição deve ter no mínimo 3 caracteres',
+        objectives: 'O objetivo deve ter no mínimo 3 caracteres',
+        duration: 25,
+      },
+    ],
+  },
+  {
+    id: uuidv4(),
+    team: getTeamByName('Rendimento'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
