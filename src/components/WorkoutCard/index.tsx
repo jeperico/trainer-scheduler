@@ -1,4 +1,3 @@
-import ITraining from '@/interfaces/training';
 import React from 'react';
 import {
   Card,
@@ -20,12 +19,13 @@ import {
 import Link from 'next/link';
 import formatTime from '@/utils/format-time';
 import formatDay from '@/utils/format-day';
+import IWorkout from '@/interfaces/workout';
 
-interface TrainingCardProps {
-  data: ITraining;
+interface WorkoutCardProps {
+  data: IWorkout;
 }
 
-const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
+const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
   const startTime =
     data.team.day && data.team.day.length > 0
       ? formatTime(
@@ -81,7 +81,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
       <CardFooter className="flex justify-between mt-auto">
         <Button variant="destructive">Excluir</Button>
         <Button asChild>
-          <Link href={`/new-training?id=${data.id}`}>Editar</Link>
+          <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
         <Button variant="outline">Copiar</Button>
       </CardFooter>
@@ -89,4 +89,4 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
   );
 };
 
-export default TrainingCard;
+export default WorkoutCard;

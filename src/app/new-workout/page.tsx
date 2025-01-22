@@ -8,15 +8,15 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AddExercise from './new-training-form/add-exercise';
+import AddExercise from './new-workout-form/add-exercise';
 import IExercise from '@/interfaces/exercise';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import DeleteExercise from './new-training-form/delete-exercise';
-import SelectTeam from './new-training-form/select-team';
+import DeleteExercise from './new-workout-form/delete-exercise';
+import SelectTeam from './new-workout-form/select-team';
 import { getTeamById } from '@/provider/api';
 
-const trainingSchema = z.object({
+const workoutSchema = z.object({
   team: z.object({
     name: z.string().min(2, {
       message: 'O nome da equipe deve ter no mínimo 2 caracteres',
@@ -73,9 +73,9 @@ const trainingSchema = z.object({
   ),
 });
 
-export type TrainingSchema = z.infer<typeof trainingSchema>;
+export type WorkoutSchema = z.infer<typeof workoutSchema>;
 
-const NewTraining = () => {
+const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -105,10 +105,10 @@ const NewTraining = () => {
     };
   };
 
-  const handleTraining = (data: TrainingSchema) => {
+  const handleWorkout = (data: WorkoutSchema) => {
     console.log('data> ', data);
     alert('Treino cadastrado com sucesso!');
-    localStorage.setItem('training-data', JSON.stringify(data));
+    localStorage.setItem('workout-data', JSON.stringify(data));
   };
 
   const handleSelect = (e: string) => {
@@ -123,12 +123,12 @@ const NewTraining = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TrainingSchema>({
-    resolver: zodResolver(trainingSchema),
+  } = useForm<WorkoutSchema>({
+    resolver: zodResolver(workoutSchema),
   });
 
   return (
-    <FormArea onSubmit={handleSubmit(handleTraining)}>
+    <FormArea onSubmit={handleSubmit(handleWorkout)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
           <SelectTeam register={register} handleSelect={handleSelect} />
@@ -203,4 +203,4 @@ const NewTraining = () => {
   );
 };
 
-export default NewTraining;
+export default NewWorkout;

@@ -1,18 +1,18 @@
 'use client';
 
-import TrainingCard from '@/components/TrainingCard';
-import ITraining from '@/interfaces/training';
+import WorkoutCard from '@/components/WorkoutCard';
+import IWorkout from '@/interfaces/workout';
 import { useEffect, useState } from 'react';
 import { get } from '@/provider/api';
 import React from 'react';
 
 const Home = () => {
-  const [trainings, setTrainings] = useState<ITraining[]>([]);
+  const [workouts, setworkouts] = useState<IWorkout[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await get('faker-training-data');
-      setTrainings(data);
+      const data = await get('faker-workout-data');
+      setworkouts(data);
     };
 
     fetchData();
@@ -20,10 +20,10 @@ const Home = () => {
 
   return (
     <main className="mx-auto w-[90vw] max-w-[1240px] p-4 grid grid-cols-2 gap-4">
-      {trainings.map((data: ITraining) => {
+      {workouts.map((data: IWorkout) => {
         return (
           <div key={data.id}>
-            <TrainingCard data={data}></TrainingCard>
+            <WorkoutCard data={data}></WorkoutCard>
           </div>
         );
       })}

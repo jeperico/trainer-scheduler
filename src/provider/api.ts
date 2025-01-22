@@ -13,9 +13,9 @@ export const post = (uri: string, data: object) => {
   if (typeof window !== 'undefined' && window.localStorage) {
     localStorage.setItem(uri, JSON.stringify(data));
 
-    const trainingData = JSON.parse(localStorage.getItem(uri) || '[]');
+    const workoutData = JSON.parse(localStorage.getItem(uri) || '[]');
 
-    return trainingData;
+    return workoutData;
   }
   return [];
 };

@@ -1,7 +1,7 @@
 import IExercise from '@/interfaces/exercise';
 import ITeam from '@/interfaces/team';
 
-export default interface ITraining {
+export default interface IWorkout {
   id: string;
   team: ITeam;
   objective: string;
