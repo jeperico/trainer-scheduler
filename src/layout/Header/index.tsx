@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import React from 'react';
-import NavMenu from './nav-menu';
+import NavMenu from './components/nav-menu';
 
 const Header = () => {
   return (

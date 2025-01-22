@@ -9,14 +9,14 @@ import {
   CardTitle,
 } from '../ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import IExercise from '@/interfaces/exercise';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../ui/accordion';
+} from '@/components/ui/accordion';
 import Link from 'next/link';
 
 interface TrainingCardProps {
