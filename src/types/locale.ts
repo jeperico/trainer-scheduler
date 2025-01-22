@@ -1,1 +1,7 @@
-export type Locale = 'Guanabara' | 'Comasa' | 'Centro' | 'Costa e Silva';
+export type Locale =
+  | 'Atiradores'
+  | 'Bucarein'
+  | 'Comasa'
+  | 'Costa e Silva'
+  | 'Itaum'
+  | 'Oficina';
