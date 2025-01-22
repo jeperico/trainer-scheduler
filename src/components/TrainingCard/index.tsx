@@ -39,14 +39,20 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
     return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
   };
 
-  const startTime = formatTime(
-    data.team.day[0].startTime.hours,
-    data.team.day[0].startTime.minutes
-  );
-  const endTime = formatTime(
-    data.team.day[0].endTime.hours,
-    data.team.day[0].endTime.minutes
-  );
+  const startTime =
+    data.team.day && data.team.day.length > 0
+      ? formatTime(
+          data.team.day[0].startTime.hours,
+          data.team.day[0].startTime.minutes
+        )
+      : '00:00';
+  const endTime =
+    data.team.day && data.team.day.length > 0
+      ? formatTime(
+          data.team.day[0].endTime.hours,
+          data.team.day[0].endTime.minutes
+        )
+      : '00:00';
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
