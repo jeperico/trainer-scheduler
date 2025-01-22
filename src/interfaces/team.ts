@@ -12,6 +12,7 @@ export enum Weekday {
 }
 
 export default interface ITeam {
+  id: string;
   name: string;
   gender: 'Masculino' | 'Feminino';
   day: Array<{
