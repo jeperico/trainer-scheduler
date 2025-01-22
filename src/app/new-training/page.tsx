@@ -5,15 +5,6 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import FormArea from '@/components/FormArea';
 import { useForm } from 'react-hook-form';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-} from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -22,6 +13,7 @@ import IExercise from '@/interfaces/exercise';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-training-form/delete-exercise';
+import SelectTeam from './new-training-form/select-team';
 
 const trainingSchema = z.object({
   team: z.object({
@@ -129,26 +121,7 @@ const NewTraining = () => {
     <FormArea onSubmit={handleSubmit(handleTraining)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <div className="flex flex-col space-y-1.5 flex-1">
-            <Label htmlFor="team">Equipe</Label>
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione o time" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Feminino</SelectLabel>
-                  <SelectItem value="1">Time 1</SelectItem>
-                  <SelectItem value="2">Time 2</SelectItem>
-                  <SelectItem value="3">Time 3</SelectItem>
-                </SelectGroup>
-                <SelectGroup>
-                  <SelectLabel>Masculino</SelectLabel>
-                  <SelectItem value="1b">Time 1b</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+          <SelectTeam register={register} />
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
             <Input

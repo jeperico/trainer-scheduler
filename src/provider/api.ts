@@ -1,3 +1,5 @@
+import ITeam from '@/interfaces/team';
+
 export const get = (uri: string) => {
   if (typeof window !== 'undefined' && window.localStorage) {
     const data = JSON.parse(localStorage.getItem(uri) || '[]');
@@ -16,4 +18,10 @@ export const post = (uri: string, data: object) => {
     return trainingData;
   }
   return [];
+};
+
+export const getTeam = (name: string) => {
+  const teams = get('teams-data');
+
+  return teams.find((team: ITeam) => team.name === name);
 };

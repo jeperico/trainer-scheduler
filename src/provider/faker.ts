@@ -1,30 +1,12 @@
 import ITeam from '@/interfaces/team';
 import ITraining from '@/interfaces/training';
-import { post } from '@/provider/api';
+import { get, getTeam, post } from '@/provider/api';
 import { v4 as uuidv4 } from 'uuid';
 
 const trainingData: Array<ITraining> = [
   {
-    id: uuidv4(),
-    team: {
-      id: uuidv4(),
-      name: 'Iniciante',
-      gender: 'Feminino',
-      day: [
-        {
-          weekday: 3,
-          startTime: {
-            hours: 10,
-            minutes: 0,
-          },
-          endTime: {
-            hours: 11,
-            minutes: 30,
-          },
-        },
-      ],
-      location: 'Bucarein',
-    },
+    id: '91bd569e-1730-4cc3-bd15-3e6119e37cbb',
+    team: getTeam('Baby Iniciante'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -38,25 +20,7 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: {
-      id: uuidv4(),
-      name: 'Intermediário',
-      gender: 'Masculino',
-      day: [
-        {
-          weekday: 0,
-          startTime: {
-            hours: 11,
-            minutes: 0,
-          },
-          endTime: {
-            hours: 12,
-            minutes: 30,
-          },
-        },
-      ],
-      location: 'Bucarein',
-    },
+    team: getTeam('Iniciante Bucarein'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -76,25 +40,7 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: {
-      id: uuidv4(),
-      name: 'Competição',
-      gender: 'Feminino',
-      day: [
-        {
-          weekday: 5,
-          startTime: {
-            hours: 15,
-            minutes: 0,
-          },
-          endTime: {
-            hours: 16,
-            minutes: 30,
-          },
-        },
-      ],
-      location: 'Itaum',
-    },
+    team: getTeam('Sub 18'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -126,25 +72,7 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: {
-      id: uuidv4(),
-      name: 'Competição',
-      gender: 'Feminino',
-      day: [
-        {
-          weekday: 5,
-          startTime: {
-            hours: 15,
-            minutes: 0,
-          },
-          endTime: {
-            hours: 16,
-            minutes: 30,
-          },
-        },
-      ],
-      location: 'Itaum',
-    },
+    team: getTeam('Rendimento'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -209,7 +137,7 @@ const teamData: Array<ITeam> = [
   },
   {
     id: uuidv4(),
-    name: 'Iniciante',
+    name: 'Iniciante Bucarein',
     gender: 'Feminino',
     day: [
       {
@@ -236,6 +164,25 @@ const teamData: Array<ITeam> = [
       },
     ],
     location: 'Bucarein',
+  },
+  {
+    id: uuidv4(),
+    name: 'Iniciante Oficina',
+    gender: 'Feminino',
+    day: [
+      {
+        weekday: 3,
+        startTime: {
+          hours: 19,
+          minutes: 0,
+        },
+        endTime: {
+          hours: 20,
+          minutes: 0,
+        },
+      },
+    ],
+    location: 'Oficina',
   },
   {
     id: uuidv4(),
@@ -288,25 +235,6 @@ const teamData: Array<ITeam> = [
   },
   {
     id: uuidv4(),
-    name: 'Iniciante',
-    gender: 'Feminino',
-    day: [
-      {
-        weekday: 3,
-        startTime: {
-          hours: 19,
-          minutes: 0,
-        },
-        endTime: {
-          hours: 20,
-          minutes: 0,
-        },
-      },
-    ],
-    location: 'Oficina',
-  },
-  {
-    id: uuidv4(),
     name: 'Sub 18',
     gender: 'Masculino',
     day: [
@@ -328,7 +256,7 @@ const teamData: Array<ITeam> = [
 
 const FetchData = () => {
   post('faker-training-data', trainingData);
-  post('teams-data', teamData);
+  if (get('teams-data').length === 0) post('teams-data', teamData);
 };
 
 export default FetchData;
