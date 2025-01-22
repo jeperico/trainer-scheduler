@@ -10,7 +10,7 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { get } from '@/provider/api';
+import { getTeamsByGender } from '@/provider/api';
 import { UseFormRegister } from 'react-hook-form';
 
 interface SelectTeamProps {
@@ -20,12 +20,6 @@ interface SelectTeamProps {
 }
 
 const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
-  const fetchTeams = (gender: string) => {
-    const teams = get('teams-data');
-
-    return teams.filter((team: ITeam) => team.gender === gender);
-  };
-
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
       <Label htmlFor="team">Equipe</Label>
@@ -36,7 +30,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Feminino</SelectLabel>
-            {fetchTeams('Feminino').map((team: ITeam) => (
+            {getTeamsByGender('Feminino').map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>
@@ -44,7 +38,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Masculino</SelectLabel>
-            {fetchTeams('Masculino').map((team: ITeam) => (
+            {getTeamsByGender('Masculino').map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>

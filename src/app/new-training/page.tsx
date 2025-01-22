@@ -126,6 +126,7 @@ const NewTraining = () => {
   } = useForm<TrainingSchema>({
     resolver: zodResolver(trainingSchema),
   });
+
   return (
     <FormArea onSubmit={handleSubmit(handleTraining)}>
       <div className="grid w-full items-center gap-4">

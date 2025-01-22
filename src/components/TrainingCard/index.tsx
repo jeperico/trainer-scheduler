@@ -18,27 +18,14 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Link from 'next/link';
+import formatTime from '@/utils/format-time';
+import formatDay from '@/utils/format-day';
 
 interface TrainingCardProps {
   data: ITraining;
 }
 
 const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
-  const formatTime = (hours: number, minutes: number) => {
-    const formattedHours = hours < 10 ? `0${hours}` : hours;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${formattedHours}:${formattedMinutes}`;
-  };
-
-  const formatDay = (date: Date) => {
-    const newDate = new Date(date);
-
-    const day = newDate.getDate();
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
-  };
-
   const startTime =
     data.team.day && data.team.day.length > 0
       ? formatTime(
@@ -53,6 +40,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
           data.team.day[0].endTime.minutes
         )
       : '00:00';
+
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>

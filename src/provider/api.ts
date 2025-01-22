@@ -31,3 +31,9 @@ export const getTeamById = (id: string) => {
 
   return teams.find((team: ITeam) => team.id === id);
 };
+
+export const getTeamsByGender = (gender: string) => {
+  const teams = get('teams-data');
+
+  return teams.filter((team: ITeam) => team.gender === gender);
+};
