@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import '@/styles/global.css';
 import { usePathname } from 'next/navigation';
 import Header from '@/layout/Header';
+import FetchData from '@/provider/faker';
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  FetchData();
   return (
     <html suppressHydrationWarning lang="en">
       <head />

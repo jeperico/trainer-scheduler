@@ -1,18 +1,27 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import { z } from 'zod';
+import FormArea from '@/components/FormArea';
+import { useForm } from 'react-hook-form';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import AddExercise from './new-training-form/add-exercise';
+import IExercise from '@/interfaces/exercise';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import DeleteExercise from './new-training-form/delete-exercise';
 
 const trainingSchema = z.object({
   team: z.object({
@@ -74,6 +83,41 @@ const trainingSchema = z.object({
 export type TrainingSchema = z.infer<typeof trainingSchema>;
 
 const NewTraining = () => {
+  const [exercises, setExercises] = useState<IExercise[]>([]);
+  const [title, setTitle] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [objectives, setObjectives] = useState<string>('');
+  const [duration, setDuration] = useState<number>(0);
+
+  const handleExercise = () => {
+    setExercises([
+      ...exercises,
+      {
+        title: title,
+        description: description,
+        objectives: objectives,
+        duration: duration,
+      },
+    ]);
+    setTitle('');
+    setDescription('');
+    setObjectives('');
+    setDuration(0);
+  };
+
+  const deleteExercise = (index: number) => {
+    return () => {
+      const newExercises = exercises.filter((_, i) => i !== index);
+      setExercises(newExercises);
+    };
+  };
+
+  const handleTraining = (data: TrainingSchema) => {
+    console.log('data> ', data);
+    alert('Treino cadastrado com sucesso!');
+    localStorage.setItem('training-data', JSON.stringify(data));
+  };
+
   const {
     register,
     handleSubmit,
@@ -81,39 +125,98 @@ const NewTraining = () => {
   } = useForm<TrainingSchema>({
     resolver: zodResolver(trainingSchema),
   });
-
-  async function onSubmit(data: TrainingSchema) {
-    try {
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   return (
-    <main className="w-screen h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Card className="w-[444px]">
-          <CardHeader className="flex items-center">
-            <CardTitle>Cadastrar Treino</CardTitle>
-            <CardDescription>
-              Cadastre as atividades dos próximos treinos.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <input type="text" {...register('objective')} />
-            {errors && <p>{errors.objective?.message}</p>}
-            <input type="text" {...register('team.name')} />
-            {errors && <p>{errors.team?.name?.message}</p>}
-            <p>HERE</p>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button variant="outline">Cancel</Button>
-            <Button>Cadastrar</Button>
-          </CardFooter>
-        </Card>
-      </form>
-    </main>
+    <FormArea onSubmit={handleSubmit(handleTraining)}>
+      <div className="grid w-full items-center gap-4">
+        <div className="flex justify-between gap-4">
+          <div className="flex flex-col space-y-1.5 flex-1">
+            <Label htmlFor="team">Equipe</Label>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione o time" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Feminino</SelectLabel>
+                  <SelectItem value="1">Time 1</SelectItem>
+                  <SelectItem value="2">Time 2</SelectItem>
+                  <SelectItem value="3">Time 3</SelectItem>
+                </SelectGroup>
+                <SelectGroup>
+                  <SelectLabel>Masculino</SelectLabel>
+                  <SelectItem value="1b">Time 1b</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col space-y-1.5">
+            <Label htmlFor="date">Dia</Label>
+            <Input
+              id="date"
+              name="date"
+              type="date"
+              register={register}
+              errors={errors.date}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <Label htmlFor="objective">Objetivo</Label>
+          <Textarea
+            id="objective"
+            name="objective"
+            placeholder="Objetivo do treino"
+            register={register}
+            errors={errors.objective}
+          />
+        </div>
+        <div className="flex flex-col space-y-1.5">
+          <Label htmlFor="data">Exercícios:</Label>
+          <AddExercise
+            register={register}
+            errors={errors.exercises?.[0]}
+            groupedSetters={{
+              title: setTitle,
+              description: setDescription,
+              objectives: setObjectives,
+              duration: setDuration,
+            }}
+            groupedGetters={{
+              title: title,
+              description: description,
+              objectives: objectives,
+              duration: duration,
+            }}
+            handleExercise={handleExercise}
+          ></AddExercise>
+          {exercises.length > 0 && (
+            <ScrollArea className="my-4 rounded-md border">
+              <div className="p-4">
+                <h4 className="mb-4 text-sm font-medium leading-none">
+                  Atividades
+                </h4>
+                {exercises.map((exercise, index) => (
+                  <div key={index} className="text-sm">
+                    <div className="flex justify-between items-center">
+                      <p>
+                        <strong>
+                          {exercise.duration} Min -{' ' + exercise.title}
+                        </strong>
+                      </p>
+                      <DeleteExercise
+                        deleteExercise={deleteExercise}
+                        index={index}
+                      />
+                    </div>
+                    <Separator className="my-2" />
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          )}
+        </div>
+      </div>
+    </FormArea>
   );
 };
 
