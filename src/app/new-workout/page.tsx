@@ -17,6 +17,7 @@ import SelectTeam from './new-workout-form/select-team';
 import { getTeamById, getWorkoutById } from '@/provider/api';
 import { useSearchParams } from 'next/navigation';
 import IWorkout from '@/interfaces/workout';
+import formatDate from '@/utils/format-date';
 
 const workoutSchema = z.object({
   team: z.object({
@@ -134,23 +135,21 @@ const NewWorkout = () => {
   const searchParams = useSearchParams();
   useEffect(() => {
     const id = searchParams.get('id');
-    if (id) {
-      const workout = getWorkoutById(id);
-      setEditableData(workout);
-    }
+    if (!id) return;
+    const workout = getWorkoutById(id);
+    setEditableData(workout);
+    if (workout) setExercises(workout.exercises);
   }, [searchParams]);
 
   return (
     <FormArea onSubmit={handleSubmit(handleWorkout)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          {editableData && (
-            <SelectTeam
-              register={register}
-              handleSelect={handleSelect}
-              editableData={editableData}
-            />
-          )}
+          <SelectTeam
+            register={register}
+            handleSelect={handleSelect}
+            {...(editableData && { editableData: editableData })}
+          />
 
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
@@ -160,7 +159,9 @@ const NewWorkout = () => {
               type="date"
               register={register}
               errors={errors.date}
-              // {...(id && { value: editableData })}
+              {...(editableData && {
+                defaultValue: formatDate(editableData.date),
+              })}
             />
           </div>
         </div>
@@ -172,6 +173,9 @@ const NewWorkout = () => {
             placeholder="Objetivo do treino"
             register={register}
             errors={errors.objective}
+            {...(editableData && {
+              defaultValue: editableData.objective,
+            })}
           />
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -192,7 +196,10 @@ const NewWorkout = () => {
               duration: duration,
             }}
             handleExercise={handleExercise}
-          ></AddExercise>
+            // {...(editableData && {
+            //   editableData: editableData.exercises,
+            // })}
+          />
           {exercises.length > 0 && (
             <ScrollArea className="my-4 rounded-md border">
               <div className="p-4">
