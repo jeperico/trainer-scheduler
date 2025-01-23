@@ -81,7 +81,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
       <CardFooter className="flex justify-between mt-auto">
         <Button variant="destructive">Excluir</Button>
         <Button asChild>
-          <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
+          <Link href={`/new-workout?id=${data.team.id}`}>Editar</Link>
         </Button>
         <Button variant="outline">Copiar</Button>
       </CardFooter>

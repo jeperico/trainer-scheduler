@@ -15,6 +15,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-workout-form/delete-exercise';
 import SelectTeam from './new-workout-form/select-team';
 import { getTeamById } from '@/provider/api';
+import { useSearchParams } from 'next/navigation';
 
 const workoutSchema = z.object({
   team: z.object({
@@ -82,6 +83,9 @@ const NewWorkout = () => {
   const [objectives, setObjectives] = useState<string>('');
   const [duration, setDuration] = useState<number>(0);
 
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+
   const handleExercise = () => {
     setExercises([
       ...exercises,
@@ -127,11 +131,21 @@ const NewWorkout = () => {
     resolver: zodResolver(workoutSchema),
   });
 
+  console.log('id: ', id);
+
   return (
     <FormArea onSubmit={handleSubmit(handleWorkout)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <SelectTeam register={register} handleSelect={handleSelect} />
+          {id ? (
+            <SelectTeam
+              register={register}
+              handleSelect={handleSelect}
+              presetValue={id}
+            />
+          ) : (
+            <SelectTeam register={register} handleSelect={handleSelect} />
+          )}
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
             <Input
