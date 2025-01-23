@@ -10,30 +10,28 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { getTeamById, getTeamsByGender } from '@/provider/api';
+import { getTeamsByGender } from '@/provider/api';
 import { UseFormRegister } from 'react-hook-form';
+import IWorkout from '@/interfaces/workout';
 
 interface SelectTeamProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   handleSelect: (e: string) => void;
-  presetValue?: string;
+  editableData: IWorkout;
 }
 
 const SelectTeam: React.FC<SelectTeamProps> = ({
   register,
   handleSelect,
-  presetValue,
+  editableData,
 }) => {
-  if (presetValue)
-    console.log(
-      'SelectTeam: ',
-      getTeamById('91bd569e-1730-4cc3-bd15-3e6119e37cbb')
-    );
+  // console.log('SelectTeam: ', editableData);
+
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
       <Label htmlFor="team">Equipe</Label>
-      <Select onValueChange={handleSelect} defaultValue={presetValue}>
+      <Select onValueChange={handleSelect} defaultValue={editableData?.team.id}>
         <SelectTrigger name="team" register={register}>
           <SelectValue placeholder="Selecione o time" />
         </SelectTrigger>

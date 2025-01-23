@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 import FormArea from '@/components/FormArea';
 import { useForm } from 'react-hook-form';
@@ -14,8 +14,9 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-workout-form/delete-exercise';
 import SelectTeam from './new-workout-form/select-team';
-import { getTeamById } from '@/provider/api';
+import { getTeamById, getWorkoutById } from '@/provider/api';
 import { useSearchParams } from 'next/navigation';
+import IWorkout from '@/interfaces/workout';
 
 const workoutSchema = z.object({
   team: z.object({
@@ -83,9 +84,6 @@ const NewWorkout = () => {
   const [objectives, setObjectives] = useState<string>('');
   const [duration, setDuration] = useState<number>(0);
 
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-
   const handleExercise = () => {
     setExercises([
       ...exercises,
@@ -131,21 +129,29 @@ const NewWorkout = () => {
     resolver: zodResolver(workoutSchema),
   });
 
-  console.log('id: ', id);
+  const [editableData, setEditableData] = useState<IWorkout | undefined>();
+
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const id = searchParams.get('id');
+    if (id) {
+      const workout = getWorkoutById(id);
+      setEditableData(workout);
+    }
+  }, [searchParams]);
 
   return (
     <FormArea onSubmit={handleSubmit(handleWorkout)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          {id ? (
+          {editableData && (
             <SelectTeam
               register={register}
               handleSelect={handleSelect}
-              presetValue={id}
+              editableData={editableData}
             />
-          ) : (
-            <SelectTeam register={register} handleSelect={handleSelect} />
           )}
+
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
             <Input
@@ -154,6 +160,7 @@ const NewWorkout = () => {
               type="date"
               register={register}
               errors={errors.date}
+              // {...(id && { value: editableData })}
             />
           </div>
         </div>
