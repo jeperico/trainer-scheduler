@@ -9,7 +9,7 @@ const teamData: Array<ITeam> = [
     gender: 'Feminino',
     day: [
       {
-        weekday: 1,
+        weekday: 'segunda',
         startTime: {
           hours: 18,
           minutes: 30,
@@ -20,7 +20,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 3,
+        weekday: 'quarta',
         startTime: {
           hours: 18,
           minutes: 30,
@@ -39,7 +39,7 @@ const teamData: Array<ITeam> = [
     gender: 'Feminino',
     day: [
       {
-        weekday: 2,
+        weekday: 'terca',
         startTime: {
           hours: 14,
           minutes: 0,
@@ -50,7 +50,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 5,
+        weekday: 'sexta',
         startTime: {
           hours: 15,
           minutes: 0,
@@ -69,7 +69,7 @@ const teamData: Array<ITeam> = [
     gender: 'Feminino',
     day: [
       {
-        weekday: 3,
+        weekday: 'quarta',
         startTime: {
           hours: 19,
           minutes: 0,
@@ -88,7 +88,7 @@ const teamData: Array<ITeam> = [
     gender: 'Feminino',
     day: [
       {
-        weekday: 2,
+        weekday: 'terca',
         startTime: {
           hours: 16,
           minutes: 0,
@@ -99,7 +99,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 5,
+        weekday: 'sexta',
         startTime: {
           hours: 16,
           minutes: 0,
@@ -118,7 +118,7 @@ const teamData: Array<ITeam> = [
     gender: 'Feminino',
     day: [
       {
-        weekday: 2,
+        weekday: 'terca',
         startTime: {
           hours: 19,
           minutes: 0,
@@ -137,7 +137,7 @@ const teamData: Array<ITeam> = [
     gender: 'Masculino',
     day: [
       {
-        weekday: 5,
+        weekday: 'sexta',
         startTime: {
           hours: 19,
           minutes: 0,

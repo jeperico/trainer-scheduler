@@ -7,6 +7,7 @@ import {
   NavigationMenuContent,
   NavigationMenuLink,
 } from '@/components/ui/navigation-menu';
+import formatSlug from '@/utils/format-slug';
 
 interface NavMenuProps {
   title: string;
@@ -22,7 +23,12 @@ const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 w-[420px]">
               {filters.map((filter) => (
-                <NavigationMenuLink key={filter}>{filter}</NavigationMenuLink>
+                <NavigationMenuLink
+                  key={filter}
+                  href={`/?${formatSlug(title)}=${formatSlug(filter)}`}
+                >
+                  {filter}
+                </NavigationMenuLink>
               ))}
             </ul>
           </NavigationMenuContent>
