@@ -1,22 +1,25 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 import FormArea from '@/components/FormArea';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AddExercise from './new-training-form/add-exercise';
+import AddExercise from './new-workout-form/add-exercise';
 import IExercise from '@/interfaces/exercise';
 import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import DeleteExercise from './new-training-form/delete-exercise';
-import SelectTeam from './new-training-form/select-team';
-import { getTeamById } from '@/provider/api';
+import DeleteExercise from './new-workout-form/delete-exercise';
+import SelectTeam from './new-workout-form/select-team';
+import { getTeamById, getWorkoutById } from '@/provider/api';
+import { useSearchParams } from 'next/navigation';
+import IWorkout from '@/interfaces/workout';
+import formatDate from '@/utils/format-date';
 
-const trainingSchema = z.object({
+const workoutSchema = z.object({
   team: z.object({
     name: z.string().min(2, {
       message: 'O nome da equipe deve ter no mínimo 2 caracteres',
@@ -73,9 +76,9 @@ const trainingSchema = z.object({
   ),
 });
 
-export type TrainingSchema = z.infer<typeof trainingSchema>;
+export type WorkoutSchema = z.infer<typeof workoutSchema>;
 
-const NewTraining = () => {
+const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -105,10 +108,10 @@ const NewTraining = () => {
     };
   };
 
-  const handleTraining = (data: TrainingSchema) => {
+  const handleWorkout = (data: WorkoutSchema) => {
     console.log('data> ', data);
     alert('Treino cadastrado com sucesso!');
-    localStorage.setItem('training-data', JSON.stringify(data));
+    localStorage.setItem('workout-data', JSON.stringify(data));
   };
 
   const handleSelect = (e: string) => {
@@ -123,14 +126,31 @@ const NewTraining = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TrainingSchema>({
-    resolver: zodResolver(trainingSchema),
+  } = useForm<WorkoutSchema>({
+    resolver: zodResolver(workoutSchema),
   });
+
+  const [editableData, setEditableData] = useState<IWorkout | undefined>();
+
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const id = searchParams.get('id');
+    if (!id) return;
+    const workout = getWorkoutById(id);
+    setEditableData(workout);
+    if (workout) setExercises(workout.exercises);
+  }, [searchParams]);
+
   return (
-    <FormArea onSubmit={handleSubmit(handleTraining)}>
+    <FormArea onSubmit={handleSubmit(handleWorkout)}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <SelectTeam register={register} handleSelect={handleSelect} />
+          <SelectTeam
+            register={register}
+            handleSelect={handleSelect}
+            {...(editableData && { editableData: editableData })}
+          />
+
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
             <Input
@@ -139,6 +159,9 @@ const NewTraining = () => {
               type="date"
               register={register}
               errors={errors.date}
+              {...(editableData && {
+                defaultValue: formatDate(editableData.date),
+              })}
             />
           </div>
         </div>
@@ -150,6 +173,9 @@ const NewTraining = () => {
             placeholder="Objetivo do treino"
             register={register}
             errors={errors.objective}
+            {...(editableData && {
+              defaultValue: editableData.objective,
+            })}
           />
         </div>
         <div className="flex flex-col space-y-1.5">
@@ -170,7 +196,10 @@ const NewTraining = () => {
               duration: duration,
             }}
             handleExercise={handleExercise}
-          ></AddExercise>
+            // {...(editableData && {
+            //   editableData: editableData.exercises,
+            // })}
+          />
           {exercises.length > 0 && (
             <ScrollArea className="my-4 rounded-md border">
               <div className="p-4">
@@ -202,4 +231,4 @@ const NewTraining = () => {
   );
 };
 
-export default NewTraining;
+export default NewWorkout;

@@ -1,4 +1,3 @@
-import ITraining from '@/interfaces/training';
 import React from 'react';
 import {
   Card,
@@ -18,35 +17,30 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Link from 'next/link';
+import formatTime from '@/utils/format-time';
+import formatDay from '@/utils/format-day';
+import IWorkout from '@/interfaces/workout';
 
-interface TrainingCardProps {
-  data: ITraining;
+interface WorkoutCardProps {
+  data: IWorkout;
 }
 
-const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
-  const formatTime = (hours: number, minutes: number) => {
-    const formattedHours = hours < 10 ? `0${hours}` : hours;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${formattedHours}:${formattedMinutes}`;
-  };
+const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
+  const startTime =
+    data.team.day && data.team.day.length > 0
+      ? formatTime(
+          data.team.day[0].startTime.hours,
+          data.team.day[0].startTime.minutes
+        )
+      : '00:00';
+  const endTime =
+    data.team.day && data.team.day.length > 0
+      ? formatTime(
+          data.team.day[0].endTime.hours,
+          data.team.day[0].endTime.minutes
+        )
+      : '00:00';
 
-  const formatDay = (date: Date) => {
-    const newDate = new Date(date);
-
-    const day = newDate.getDate();
-    const month = newDate.getMonth() + 1;
-    const year = newDate.getFullYear();
-    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
-  };
-
-  const startTime = formatTime(
-    data.team.day[0].startTime.hours,
-    data.team.day[0].startTime.minutes
-  );
-  const endTime = formatTime(
-    data.team.day[0].endTime.hours,
-    data.team.day[0].endTime.minutes
-  );
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
@@ -87,7 +81,7 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
       <CardFooter className="flex justify-between mt-auto">
         <Button variant="destructive">Excluir</Button>
         <Button asChild>
-          <Link href={`/new-training?id=${data.id}`}>Editar</Link>
+          <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
         <Button variant="outline">Copiar</Button>
       </CardFooter>
@@ -95,4 +89,4 @@ const TrainingCard: React.FC<TrainingCardProps> = ({ data }) => {
   );
 };
 
-export default TrainingCard;
+export default WorkoutCard;

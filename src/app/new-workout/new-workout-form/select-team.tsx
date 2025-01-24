@@ -10,33 +10,40 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { get } from '@/provider/api';
+import { getTeamsByGender } from '@/provider/api';
 import { UseFormRegister } from 'react-hook-form';
+import IWorkout from '@/interfaces/workout';
 
 interface SelectTeamProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   handleSelect: (e: string) => void;
+  editableData?: IWorkout;
 }
 
-const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
-  const fetchTeams = (gender: string) => {
-    const teams = get('teams-data');
-
-    return teams.filter((team: ITeam) => team.gender === gender);
-  };
+const SelectTeam: React.FC<SelectTeamProps> = ({
+  register,
+  handleSelect,
+  editableData,
+}) => {
+  // console.log('SelectTeam: ', editableData);
 
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
       <Label htmlFor="team">Equipe</Label>
-      <Select onValueChange={handleSelect}>
+      <Select
+        onValueChange={handleSelect}
+        // defaultValue={editableData?.team.id}
+        value={editableData?.team.id}
+        // {...(editableData && { defaultValue: editableData.team.id })}
+      >
         <SelectTrigger name="team" register={register}>
           <SelectValue placeholder="Selecione o time" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Feminino</SelectLabel>
-            {fetchTeams('Feminino').map((team: ITeam) => (
+            {getTeamsByGender('Feminino').map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>
@@ -44,7 +51,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({ register, handleSelect }) => {
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Masculino</SelectLabel>
-            {fetchTeams('Masculino').map((team: ITeam) => (
+            {getTeamsByGender('Masculino').map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>

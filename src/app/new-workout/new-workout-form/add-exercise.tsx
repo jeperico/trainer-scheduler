@@ -31,6 +31,7 @@ interface AddExerciseProps {
   groupedSetters: IGroupedSetters;
   groupedGetters: IExercise;
   handleExercise: () => void;
+  // editableData: IExercise;
 }
 
 const AddExercise: React.FC<AddExerciseProps> = ({
@@ -39,6 +40,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({
   groupedSetters,
   groupedGetters,
   handleExercise,
+  // editableData,
 }) => {
   const handleSetter = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

@@ -25,7 +25,7 @@ export default function RootLayout({
             </div>
           }
         >
-          {pathname === '/new-training' ? null : <Header />}
+          {pathname === '/new-workout' ? null : <Header />}
           {children}
         </Suspense>
       </body>

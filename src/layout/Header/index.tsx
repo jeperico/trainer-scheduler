@@ -9,7 +9,7 @@ const Header = () => {
     <header className="mx-auto w-[90vw] max-w-[1240px] my-4">
       <div className="flex justify-between items-center">
         <Button asChild className="bg-green-600 text-white hover:bg-green-700">
-          <Link href="/new-training">Criar novo treino</Link>
+          <Link href="/new-workout">Criar novo treino</Link>
         </Button>
         <div className="flex gap-4">
           <NavMenu title="Gênero" filters={['Masculino', 'Feminino']} />

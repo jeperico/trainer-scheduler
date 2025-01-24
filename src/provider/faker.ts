@@ -1,12 +1,12 @@
 import ITeam from '@/interfaces/team';
-import ITraining from '@/interfaces/training';
+import IWorkout from '@/interfaces/workout';
 import { get, getTeamByName, post } from '@/provider/api';
 import { v4 as uuidv4 } from 'uuid';
 
-const trainingData: Array<ITraining> = [
+const workoutData: Array<IWorkout> = [
   {
-    id: '91bd569e-1730-4cc3-bd15-3e6119e37cbb',
-    team: getTeamByName('Baby Iniciante'),
+    id: uuidv4(),
+    team: getTeamByName('Sub 18'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -20,7 +20,7 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: getTeamByName('Iniciante Bucarein'),
+    team: getTeamByName('Sub 18'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -72,7 +72,7 @@ const trainingData: Array<ITraining> = [
   },
   {
     id: uuidv4(),
-    team: getTeamByName('Rendimento'),
+    team: getTeamByName('Sub 18'),
     objective: 'O objetivo deve ter no mínimo 3 caracteres',
     date: new Date(),
     exercises: [
@@ -103,6 +103,8 @@ const trainingData: Array<ITraining> = [
     ],
   },
 ];
+
+console.log('workoutData: ', workoutData);
 
 const teamData: Array<ITeam> = [
   {
@@ -255,7 +257,8 @@ const teamData: Array<ITeam> = [
 ];
 
 const FetchData = () => {
-  post('faker-training-data', trainingData);
+  if (get('faker-workout-data').length === 0)
+    post('faker-workout-data', workoutData);
   if (get('teams-data').length === 0) post('teams-data', teamData);
 };
 
