@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,11 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
-    "types": [
-      "node",
-      "estree",
-      "json-schema"
-    ],
+    "types": ["node", "estree", "json-schema"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -29,9 +21,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
@@ -43,7 +33,5 @@
     "tailwind.config.js",
     "postcss.config.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
