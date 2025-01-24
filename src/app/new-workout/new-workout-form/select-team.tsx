@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import ITeam from '@/interfaces/team';
+import React, { useEffect } from "react";
+import ITeam from "@/interfaces/team";
 import {
   Select,
   SelectTrigger,
@@ -8,10 +8,10 @@ import {
   SelectGroup,
   SelectLabel,
   SelectItem,
-} from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { getTeamsByGender } from '@/provider/api';
-import IWorkout from '@/interfaces/workout';
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { getTeamsByGender } from "@/provider/api";
+import IWorkout from "@/interfaces/workout";
 
 interface SelectTeamProps {
   name: string;
@@ -44,7 +44,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Feminino</SelectLabel>
-            {getTeamsByGender('Feminino').map((team: ITeam) => (
+            {getTeamsByGender("Feminino").map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>
@@ -52,7 +52,7 @@ const SelectTeam: React.FC<SelectTeamProps> = ({
           </SelectGroup>
           <SelectGroup>
             <SelectLabel>Masculino</SelectLabel>
-            {getTeamsByGender('Masculino').map((team: ITeam) => (
+            {getTeamsByGender("Masculino").map((team: ITeam) => (
               <SelectItem key={team.id} value={team.id}>
                 {team.name}
               </SelectItem>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   NavigationMenu,
   NavigationMenuList,
@@ -6,9 +6,9 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuLink,
-} from '@/components/ui/navigation-menu';
-import formatSlug from '@/utils/format-slug';
-import { Separator } from '@/components/ui/separator';
+} from "@/components/ui/navigation-menu";
+import formatSlug from "@/utils/format-slug";
+import { Separator } from "@/components/ui/separator";
 
 interface NavMenuProps {
   title: string;

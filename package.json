@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier . --write && eslint src --fix",
+    "lint": "prettier . --write",
+    "lintes": "prettier . --write && eslint src --fix",
     "prepare": "husky"
   },
   "dependencies": {

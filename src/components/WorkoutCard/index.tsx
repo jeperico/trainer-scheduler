@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
@@ -6,20 +6,20 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import IExercise from '@/interfaces/exercise';
+} from "../ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import IExercise from "@/interfaces/exercise";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import Link from 'next/link';
-import formatTime from '@/utils/format-time';
-import formatDay from '@/utils/format-day';
-import IWorkout from '@/interfaces/workout';
+} from "@/components/ui/accordion";
+import Link from "next/link";
+import formatTime from "@/utils/format-time";
+import formatDay from "@/utils/format-day";
+import IWorkout from "@/interfaces/workout";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -28,10 +28,10 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from '@/components/ui/alert-dialog';
-import { AlertDialogHeader, AlertDialogFooter } from '../ui/alert-dialog';
-import { delWorkoutByID } from '@/provider/api';
-import CopyButton from '../CopyButton';
+} from "@/components/ui/alert-dialog";
+import { AlertDialogHeader, AlertDialogFooter } from "../ui/alert-dialog";
+import { delWorkoutByID } from "@/provider/api";
+import CopyButton from "../CopyButton";
 
 interface WorkoutCardProps {
   data: IWorkout;
@@ -42,16 +42,16 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
     data.team.day && data.team.day.length > 0
       ? formatTime(
           data.team.day[0].startTime.hours,
-          data.team.day[0].startTime.minutes
+          data.team.day[0].startTime.minutes,
         )
-      : '00:00';
+      : "00:00";
   const endTime =
     data.team.day && data.team.day.length > 0
       ? formatTime(
           data.team.day[0].endTime.hours,
-          data.team.day[0].endTime.minutes
+          data.team.day[0].endTime.minutes,
         )
-      : '00:00';
+      : "00:00";
 
   return (
     <Card className="flex flex-col h-full">
@@ -121,7 +121,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
             .map((exercise: IExercise) => {
               return `${exercise.title} - ${exercise.duration} minutos \n${exercise.description}\n${exercise.objectives}`;
             })
-            .join('\n\n')}`}
+            .join("\n\n")}`}
         />
       </CardFooter>
     </Card>

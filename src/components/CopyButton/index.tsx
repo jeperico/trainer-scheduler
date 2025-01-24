@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from '../ui/button';
+import React from "react";
+import { Button } from "../ui/button";
 
 interface CopyButtonProps {
   text: string;
@@ -10,10 +10,10 @@ const CopyButton: React.FC<CopyButtonProps> = ({ text }) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        console.log('Text copied to clipboard!');
+        console.log("Text copied to clipboard!");
       })
       .catch((err) => {
-        console.error('Failed to copy text: ', err);
+        console.error("Failed to copy text: ", err);
       });
   };
 

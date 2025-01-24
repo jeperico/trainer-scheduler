@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,12 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import React from 'react';
-import { Textarea } from '@/components/ui/textarea';
-import IExercise from '@/interfaces/exercise';
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import React from "react";
+import { Textarea } from "@/components/ui/textarea";
+import IExercise from "@/interfaces/exercise";
 
 interface IGroupedSetters {
   title: React.Dispatch<React.SetStateAction<string>>;
@@ -35,9 +35,9 @@ const AddExercise: React.FC<AddExerciseProps> = ({
 }) => {
   const handleSetter = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    setter: keyof IGroupedSetters
+    setter: keyof IGroupedSetters,
   ) => {
-    return setter === 'duration'
+    return setter === "duration"
       ? groupedSetters[setter](Number(e.target.value))
       : groupedSetters[setter](e.target.value);
   };
@@ -63,7 +63,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({
                 name="title"
                 type="text"
                 value={groupedGetters.title}
-                onChange={(e) => handleSetter(e, 'title')}
+                onChange={(e) => handleSetter(e, "title")}
                 required
               />
             </div>
@@ -74,7 +74,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({
                 name="duration"
                 type="number"
                 value={groupedGetters.duration}
-                onChange={(e) => handleSetter(e, 'duration')}
+                onChange={(e) => handleSetter(e, "duration")}
                 required
               />
             </div>
@@ -86,7 +86,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({
               name="description"
               value={groupedGetters.description}
               placeholder="Descrição do exercício"
-              onChange={(e) => handleSetter(e, 'description')}
+              onChange={(e) => handleSetter(e, "description")}
               required
             />
           </div>
@@ -97,7 +97,7 @@ const AddExercise: React.FC<AddExerciseProps> = ({
               name="objectives"
               value={groupedGetters.objectives}
               placeholder="Objetivo do treino"
-              onChange={(e) => handleSetter(e, 'objectives')}
+              onChange={(e) => handleSetter(e, "objectives")}
             />
           </div>
         </div>

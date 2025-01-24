@@ -1,13 +1,13 @@
 const formatSlug = (slug: string): string => {
   return slug
-    .replace(/ /g, '-')
-    .replace(/[çÇ]/g, 'c')
-    .replace(/[áàâãä]/g, 'a')
-    .replace(/[éèêë]/g, 'e')
-    .replace(/[íìîï]/g, 'i')
-    .replace(/[óòôõö]/g, 'o')
-    .replace(/[úùûü]/g, 'u')
-    .replace(/[ñ]/g, 'n')
+    .replace(/ /g, "-")
+    .replace(/[çÇ]/g, "c")
+    .replace(/[áàâãä]/g, "a")
+    .replace(/[éèêë]/g, "e")
+    .replace(/[íìîï]/g, "i")
+    .replace(/[óòôõö]/g, "o")
+    .replace(/[úùûü]/g, "u")
+    .replace(/[ñ]/g, "n")
     .toLowerCase();
 };
 

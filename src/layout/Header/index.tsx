@@ -1,10 +1,10 @@
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import Link from 'next/link';
-import React from 'react';
-import NavMenu from './components/nav-menu';
-import { get } from '@/provider/api';
-import ITeam from '@/interfaces/team';
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import React from "react";
+import NavMenu from "./components/nav-menu";
+import { get } from "@/provider/api";
+import ITeam from "@/interfaces/team";
 
 const Header = () => {
   return (
@@ -14,32 +14,32 @@ const Header = () => {
           <Link href="/new-workout">Criar novo treino</Link>
         </Button>
         <div className="flex gap-4">
-          <NavMenu title="Gênero" filters={['Masculino', 'Feminino']} />
+          <NavMenu title="Gênero" filters={["Masculino", "Feminino"]} />
           <NavMenu
             title="Nome"
-            filters={get('teams-data').map((team: ITeam) => team.name)}
+            filters={get("teams-data").map((team: ITeam) => team.name)}
           />
           <NavMenu
             title="Local"
             filters={[
-              'Atiradores',
-              'Bucarein',
-              'Comasa',
-              'Costa e Silva',
-              'Itaum',
-              'Oficina',
+              "Atiradores",
+              "Bucarein",
+              "Comasa",
+              "Costa e Silva",
+              "Itaum",
+              "Oficina",
             ]}
           />
           <NavMenu
             title="Dia da Semana"
             filters={[
-              'Domingo',
-              'Segunda',
-              'Terça',
-              'Quarta',
-              'Quinta',
-              'Sexta',
-              'Sábado',
+              "Domingo",
+              "Segunda",
+              "Terça",
+              "Quarta",
+              "Quinta",
+              "Sexta",
+              "Sábado",
             ]}
           />
         </div>

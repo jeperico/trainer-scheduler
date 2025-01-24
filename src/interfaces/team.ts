@@ -1,7 +1,7 @@
-import { Time } from '@/types/time';
-import { Locale } from '@/types/locale';
+import { Time } from "@/types/time";
+import { Locale } from "@/types/locale";
 
-export type Gender = 'Masculino' | 'Feminino';
+export type Gender = "Masculino" | "Feminino";
 
 export default interface ITeam {
   id: string;

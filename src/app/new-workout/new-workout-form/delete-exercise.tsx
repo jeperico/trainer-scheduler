@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   AlertDialogHeader,
   AlertDialogFooter,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -13,7 +13,7 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from '@/components/ui/alert-dialog';
+} from "@/components/ui/alert-dialog";
 
 interface DeleteExerciseProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

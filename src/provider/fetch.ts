@@ -1,15 +1,15 @@
-import ITeam from '@/interfaces/team';
-import { get, post } from '@/provider/api';
-import { v4 as uuidv4 } from 'uuid';
+import ITeam from "@/interfaces/team";
+import { get, post } from "@/provider/api";
+import { v4 as uuidv4 } from "uuid";
 
 const teamData: Array<ITeam> = [
   {
     id: uuidv4(),
-    name: 'Baby Iniciante',
-    gender: 'Feminino',
+    name: "Baby Iniciante",
+    gender: "Feminino",
     day: [
       {
-        weekday: 'segunda',
+        weekday: "segunda",
         startTime: {
           hours: 18,
           minutes: 30,
@@ -20,7 +20,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 'quarta',
+        weekday: "quarta",
         startTime: {
           hours: 18,
           minutes: 30,
@@ -31,15 +31,15 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Oficina',
+    location: "Oficina",
   },
   {
     id: uuidv4(),
-    name: 'Iniciante Bucarein',
-    gender: 'Feminino',
+    name: "Iniciante Bucarein",
+    gender: "Feminino",
     day: [
       {
-        weekday: 'terca',
+        weekday: "terca",
         startTime: {
           hours: 14,
           minutes: 0,
@@ -50,7 +50,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 'sexta',
+        weekday: "sexta",
         startTime: {
           hours: 15,
           minutes: 0,
@@ -61,15 +61,15 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Bucarein',
+    location: "Bucarein",
   },
   {
     id: uuidv4(),
-    name: 'Iniciante Oficina',
-    gender: 'Feminino',
+    name: "Iniciante Oficina",
+    gender: "Feminino",
     day: [
       {
-        weekday: 'quarta',
+        weekday: "quarta",
         startTime: {
           hours: 19,
           minutes: 0,
@@ -80,15 +80,15 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Oficina',
+    location: "Oficina",
   },
   {
     id: uuidv4(),
-    name: 'Intermediário',
-    gender: 'Feminino',
+    name: "Intermediário",
+    gender: "Feminino",
     day: [
       {
-        weekday: 'terca',
+        weekday: "terca",
         startTime: {
           hours: 16,
           minutes: 0,
@@ -99,7 +99,7 @@ const teamData: Array<ITeam> = [
         },
       },
       {
-        weekday: 'sexta',
+        weekday: "sexta",
         startTime: {
           hours: 16,
           minutes: 0,
@@ -110,15 +110,15 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Bucarein',
+    location: "Bucarein",
   },
   {
     id: uuidv4(),
-    name: 'Rendimento',
-    gender: 'Feminino',
+    name: "Rendimento",
+    gender: "Feminino",
     day: [
       {
-        weekday: 'terca',
+        weekday: "terca",
         startTime: {
           hours: 19,
           minutes: 0,
@@ -129,15 +129,15 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Oficina',
+    location: "Oficina",
   },
   {
     id: uuidv4(),
-    name: 'Sub 18',
-    gender: 'Masculino',
+    name: "Sub 18",
+    gender: "Masculino",
     day: [
       {
-        weekday: 'sexta',
+        weekday: "sexta",
         startTime: {
           hours: 19,
           minutes: 0,
@@ -148,13 +148,13 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: 'Atiradores',
+    location: "Atiradores",
   },
 ];
 
 const FetchData = () => {
-  if (get('teams-data').length !== 0) return;
-  teamData.forEach((team) => post('teams-data', team));
+  if (get("teams-data").length !== 0) return;
+  teamData.forEach((team) => post("teams-data", team));
 };
 
 export default FetchData;

@@ -1,5 +1,5 @@
-import IExercise from '@/interfaces/exercise';
-import ITeam from '@/interfaces/team';
+import IExercise from "@/interfaces/exercise";
+import ITeam from "@/interfaces/team";
 
 export default interface IWorkout {
   id: string;

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -9,8 +9,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from '@/components/ui/card';
-import Link from 'next/link';
+} from "@/components/ui/card";
+import Link from "next/link";
 
 interface IFormAreaProps {
   children: React.ReactNode;

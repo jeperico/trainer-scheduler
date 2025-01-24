@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import FormArea from '@/components/FormArea';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import AddExercise from './new-workout-form/add-exercise';
-import IExercise from '@/interfaces/exercise';
-import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import DeleteExercise from './new-workout-form/delete-exercise';
-import SelectTeam from './new-workout-form/select-team';
+import React, { useEffect, useState } from "react";
+import FormArea from "@/components/FormArea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import AddExercise from "./new-workout-form/add-exercise";
+import IExercise from "@/interfaces/exercise";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import DeleteExercise from "./new-workout-form/delete-exercise";
+import SelectTeam from "./new-workout-form/select-team";
 import {
   del,
   get,
@@ -18,17 +18,17 @@ import {
   getTeamByName,
   getWorkoutById,
   post,
-} from '@/provider/api';
-import { useSearchParams } from 'next/navigation';
-import IWorkout from '@/interfaces/workout';
-import formatDate from '@/utils/format-date';
-import { v4 as uuidv4 } from 'uuid';
+} from "@/provider/api";
+import { useSearchParams } from "next/navigation";
+import IWorkout from "@/interfaces/workout";
+import formatDate from "@/utils/format-date";
+import { v4 as uuidv4 } from "uuid";
 
 const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);
-  const [title, setTitle] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [objectives, setObjectives] = useState<string>('');
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [objectives, setObjectives] = useState<string>("");
   const [duration, setDuration] = useState<number>(0);
 
   const handleExercise = () => {
@@ -41,9 +41,9 @@ const NewWorkout = () => {
         duration: duration,
       },
     ]);
-    setTitle('');
-    setDescription('');
-    setObjectives('');
+    setTitle("");
+    setDescription("");
+    setObjectives("");
     setDuration(0);
   };
 
@@ -56,12 +56,12 @@ const NewWorkout = () => {
 
   const [editableData, setEditableData] = useState<IWorkout | undefined>();
   const [selectedTeam, setSelectedTeam] = useState<string | undefined>(
-    editableData?.team.name
+    editableData?.team.name,
   );
 
   const searchParams = useSearchParams();
   useEffect(() => {
-    const id = searchParams.get('id');
+    const id = searchParams.get("id");
     if (!id) return;
     const workout = getWorkoutById(id);
     setEditableData(workout);
@@ -74,24 +74,24 @@ const NewWorkout = () => {
       id: uuidv4(),
       team: selectedTeam
         ? getTeamById(selectedTeam)
-        : getTeamByName('Baby Iniciante'),
+        : getTeamByName("Baby Iniciante"),
       objective: e.currentTarget.objective.value,
       date: e.currentTarget.date.value,
       exercises: exercises,
     };
     if (handleEditedWorkout(workoutData)) return;
-    post('workouts-data', workoutData);
+    post("workouts-data", workoutData);
   };
 
   const handleEditedWorkout = (data: IWorkout) => {
     if (!editableData) return false;
-    const current = get('workouts-data');
-    del('workouts-data');
+    const current = get("workouts-data");
+    del("workouts-data");
     const newCurrent = current.filter((workout: IWorkout) => {
       return workout.id !== editableData.id;
     });
     const newData = [data, ...newCurrent];
-    newData.forEach((workout: IWorkout) => post('workouts-data', workout));
+    newData.forEach((workout: IWorkout) => post("workouts-data", workout));
     return true;
   };
 
@@ -156,7 +156,7 @@ const NewWorkout = () => {
                     <div className="flex justify-between items-center">
                       <p>
                         <strong>
-                          {exercise.duration} Min -{' ' + exercise.title}
+                          {exercise.duration} Min -{" " + exercise.title}
                         </strong>
                       </p>
                       <DeleteExercise
