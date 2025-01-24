@@ -12,7 +12,6 @@ import {
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import IExercise from '@/interfaces/exercise';
 
@@ -24,29 +23,20 @@ interface IGroupedSetters {
 }
 
 interface AddExerciseProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: UseFormRegister<any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  errors: any;
   groupedSetters: IGroupedSetters;
   groupedGetters: IExercise;
   handleExercise: () => void;
-  // editableData: IExercise;
 }
 
 const AddExercise: React.FC<AddExerciseProps> = ({
-  register,
-  errors,
   groupedSetters,
   groupedGetters,
   handleExercise,
-  // editableData,
 }) => {
   const handleSetter = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     setter: keyof IGroupedSetters
   ) => {
-    console.log('errors', errors);
     return setter === 'duration'
       ? groupedSetters[setter](Number(e.target.value))
       : groupedSetters[setter](e.target.value);
@@ -73,8 +63,6 @@ const AddExercise: React.FC<AddExerciseProps> = ({
                 name="title"
                 type="text"
                 value={groupedGetters.title}
-                register={register}
-                errors={errors?.title}
                 onChange={(e) => handleSetter(e, 'title')}
                 required
               />
@@ -86,8 +74,6 @@ const AddExercise: React.FC<AddExerciseProps> = ({
                 name="duration"
                 type="number"
                 value={groupedGetters.duration}
-                register={register}
-                errors={errors?.duration}
                 onChange={(e) => handleSetter(e, 'duration')}
                 required
               />
@@ -100,8 +86,6 @@ const AddExercise: React.FC<AddExerciseProps> = ({
               name="description"
               value={groupedGetters.description}
               placeholder="Descrição do exercício"
-              register={register}
-              errors={errors?.description}
               onChange={(e) => handleSetter(e, 'description')}
               required
             />
@@ -113,8 +97,6 @@ const AddExercise: React.FC<AddExerciseProps> = ({
               name="objectives"
               value={groupedGetters.objectives}
               placeholder="Objetivo do treino"
-              register={register}
-              errors={errors?.objectives}
               onChange={(e) => handleSetter(e, 'objectives')}
             />
           </div>

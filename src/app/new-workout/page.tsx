@@ -1,10 +1,7 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect, useState } from 'react';
-import { z } from 'zod';
 import FormArea from '@/components/FormArea';
-import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,69 +11,10 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-workout-form/delete-exercise';
 import SelectTeam from './new-workout-form/select-team';
-import { getTeamById, getWorkoutById } from '@/provider/api';
+import { getWorkoutById } from '@/provider/api';
 import { useSearchParams } from 'next/navigation';
 import IWorkout from '@/interfaces/workout';
 import formatDate from '@/utils/format-date';
-
-const workoutSchema = z.object({
-  team: z.object({
-    name: z.string().min(2, {
-      message: 'O nome da equipe deve ter no mínimo 2 caracteres',
-    }),
-    gender: z.enum(['Masculino', 'Feminino']),
-    day: z.array(
-      z.object({
-        weekday: z.enum([
-          'sunday',
-          'monday',
-          'tuesday',
-          'wednesday',
-          'thursday',
-          'friday',
-          'saturday',
-        ]),
-        startTime: z.string(),
-        endTime: z.string(),
-      })
-    ),
-    location: z.enum([
-      'Guanabara',
-      'Comasa',
-      'Centro',
-      'Costa e Silva',
-      'Atiradores',
-      'Bucarein',
-      'Itaum',
-      'Oficina',
-    ]),
-  }),
-  objective: z.string().min(3, {
-    message: 'O objetivo deve ter no mínimo 3 caracteres',
-  }),
-  date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'A data deve estar no formato YYYY-MM-DD'),
-  exercises: z.array(
-    z.object({
-      title: z.string().min(2, {
-        message: 'O título deve ter no mínimo 2 caracteres',
-      }),
-      description: z.string().min(3, {
-        message: 'A descrição deve ter no mínimo 3 caracteres',
-      }),
-      objectives: z.string(),
-      duration: z
-        .number()
-        .min(1, {
-          message: 'A duração deve ser de no mínimo 1 minuto',
-        })
-        .max(120, { message: 'A duração deve ser de no máximo 120 minutos' }),
-    })
-  ),
-});
-
-export type WorkoutSchema = z.infer<typeof workoutSchema>;
 
 const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);
@@ -108,28 +46,6 @@ const NewWorkout = () => {
     };
   };
 
-  const handleWorkout = (data: WorkoutSchema) => {
-    console.log('data> ', data);
-    alert('Treino cadastrado com sucesso!');
-    localStorage.setItem('workout-data', JSON.stringify(data));
-  };
-
-  const handleSelect = (e: string) => {
-    console.log(getTeamById(e));
-    register('team', {
-      required: 'Selecione uma equipe',
-      value: getTeamById(e),
-    });
-  };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<WorkoutSchema>({
-    resolver: zodResolver(workoutSchema),
-  });
-
   const [editableData, setEditableData] = useState<IWorkout | undefined>();
 
   const searchParams = useSearchParams();
@@ -142,14 +58,10 @@ const NewWorkout = () => {
   }, [searchParams]);
 
   return (
-    <FormArea onSubmit={handleSubmit(handleWorkout)}>
+    <FormArea onSubmit={(e) => e.preventDefault()}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <SelectTeam
-            register={register}
-            handleSelect={handleSelect}
-            {...(editableData && { editableData: editableData })}
-          />
+          <SelectTeam {...(editableData && { editableData: editableData })} />
 
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>
@@ -157,8 +69,6 @@ const NewWorkout = () => {
               id="date"
               name="date"
               type="date"
-              register={register}
-              errors={errors.date}
               {...(editableData && {
                 defaultValue: formatDate(editableData.date),
               })}
@@ -171,8 +81,6 @@ const NewWorkout = () => {
             id="objective"
             name="objective"
             placeholder="Objetivo do treino"
-            register={register}
-            errors={errors.objective}
             {...(editableData && {
               defaultValue: editableData.objective,
             })}
@@ -181,8 +89,6 @@ const NewWorkout = () => {
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="data">Exercícios:</Label>
           <AddExercise
-            register={register}
-            errors={errors.exercises?.[0]}
             groupedSetters={{
               title: setTitle,
               description: setDescription,
@@ -196,9 +102,6 @@ const NewWorkout = () => {
               duration: duration,
             }}
             handleExercise={handleExercise}
-            // {...(editableData && {
-            //   editableData: editableData.exercises,
-            // })}
           />
           {exercises.length > 0 && (
             <ScrollArea className="my-4 rounded-md border">
