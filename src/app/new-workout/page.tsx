@@ -12,6 +12,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-workout-form/delete-exercise';
 import SelectTeam from './new-workout-form/select-team';
 import {
+  del,
+  get,
   getTeamById,
   getTeamByName,
   getWorkoutById,
@@ -66,12 +68,8 @@ const NewWorkout = () => {
     if (workout) setExercises(workout.exercises);
   }, [searchParams]);
 
-  const handleSelectedTeam = (team: string) => {
-    setSelectedTeam(team);
-  };
-
   const handleWorkout = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
+    e.preventDefault();
     const workoutData: IWorkout = {
       id: uuidv4(),
       team: selectedTeam
@@ -81,8 +79,20 @@ const NewWorkout = () => {
       date: e.currentTarget.date.value,
       exercises: exercises,
     };
+    if (handleEditedWorkout(workoutData)) return;
     post('workouts-data', workoutData);
-    console.log('Workout data:', workoutData);
+  };
+
+  const handleEditedWorkout = (data: IWorkout) => {
+    if (!editableData) return false;
+    const current = get('workouts-data');
+    del('workouts-data');
+    const newCurrent = current.filter((workout: IWorkout) => {
+      return workout.id !== editableData.id;
+    });
+    const newData = [data, ...newCurrent];
+    newData.forEach((workout: IWorkout) => post('workouts-data', workout));
+    return true;
   };
 
   return (
@@ -92,7 +102,7 @@ const NewWorkout = () => {
           <SelectTeam
             name="team"
             {...(editableData && { editableData: editableData })}
-            setSelectedTeam={handleSelectedTeam}
+            setSelectedTeam={setSelectedTeam}
           />
 
           <div className="flex flex-col space-y-1.5">

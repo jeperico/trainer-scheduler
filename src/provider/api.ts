@@ -28,6 +28,12 @@ export const post = (uri: string, data: object) => {
   return [];
 };
 
+export const del = (uri: string) => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    localStorage.removeItem(uri);
+  }
+};
+
 export const getTeamByName = (name: string) => {
   const teams = get('teams-data');
 
@@ -47,7 +53,7 @@ export const getTeamsByGender = (gender: string) => {
 };
 
 export const getWorkoutById = (id: string) => {
-  const workouts = get('faker-workout-data');
+  const workouts = get('workouts-data');
 
   return workouts.find((workout: IWorkout) => workout.id === id);
 };

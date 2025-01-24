@@ -29,12 +29,15 @@ const SelectTeam: React.FC<SelectTeamProps> = ({
       setSelectedTeam(editableData.team.id);
     }
   }, [editableData]);
-  if (editableData) setSelectedTeam(editableData?.team.id);
+
+  const handle = (team: string) => {
+    setSelectedTeam(team);
+  };
 
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
       <Label htmlFor={name}>Equipe</Label>
-      <Select onValueChange={setSelectedTeam}>
+      <Select onValueChange={handle}>
         <SelectTrigger name={name}>
           <SelectValue placeholder="Selecione o time" />
         </SelectTrigger>
