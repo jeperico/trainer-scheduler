@@ -2,9 +2,9 @@ CONVENTIONAL-TYPE: DESCRIPTION
 
 # _branch-origin merge to branch-target_.
 
-**_Objetivo Principal:_** DESCRIPTION.
+**_Main Objective:_** DESCRIPTION.
 
-## O que foi feito:
+## What wanna done:
 
 **_TOPIC:_** DESCRIPTION.
 IMAGE
