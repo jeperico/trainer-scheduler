@@ -12,7 +12,14 @@ export const get = (uri: string) => {
 
 export const post = (uri: string, data: object) => {
   if (typeof window !== 'undefined' && window.localStorage) {
-    localStorage.setItem(uri, JSON.stringify(data));
+    let currentData = JSON.parse(localStorage.getItem(uri) || '[]');
+    if (!Array.isArray(currentData)) {
+      currentData = [];
+    }
+
+    currentData.push(data);
+
+    localStorage.setItem(uri, JSON.stringify(currentData));
 
     const workoutData = JSON.parse(localStorage.getItem(uri) || '[]');
 
