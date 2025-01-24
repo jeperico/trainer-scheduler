@@ -8,6 +8,7 @@ import {
   NavigationMenuLink,
 } from '@/components/ui/navigation-menu';
 import formatSlug from '@/utils/format-slug';
+import { Separator } from '@/components/ui/separator';
 
 interface NavMenuProps {
   title: string;
@@ -28,6 +29,7 @@ const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
                   href={`/?${formatSlug(title)}=${formatSlug(filter)}`}
                 >
                   {filter}
+                  <Separator />
                 </NavigationMenuLink>
               ))}
             </ul>

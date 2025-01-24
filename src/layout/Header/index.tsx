@@ -3,6 +3,8 @@ import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import React from 'react';
 import NavMenu from './components/nav-menu';
+import { get } from '@/provider/api';
+import ITeam from '@/interfaces/team';
 
 const Header = () => {
   return (
@@ -15,7 +17,7 @@ const Header = () => {
           <NavMenu title="Gênero" filters={['Masculino', 'Feminino']} />
           <NavMenu
             title="Nome"
-            filters={['Iniciante', 'Intermediário', 'Competição']}
+            filters={get('teams-data').map((team: ITeam) => team.name)}
           />
           <NavMenu
             title="Local"
