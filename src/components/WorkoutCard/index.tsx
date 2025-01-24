@@ -31,6 +31,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { AlertDialogHeader, AlertDialogFooter } from '../ui/alert-dialog';
 import { delWorkoutByID } from '@/provider/api';
+import CopyButton from '../CopyButton';
 
 interface WorkoutCardProps {
   data: IWorkout;
@@ -115,7 +116,13 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
         <Button asChild>
           <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
-        <Button variant="outline">Copiar</Button>
+        <CopyButton
+          text={`Turma: ${data.team.name} - ${data.date}; \nBairro: ${data.team.location}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
+            .map((exercise: IExercise) => {
+              return `${exercise.title} - ${exercise.duration} minutos \n${exercise.description}\n${exercise.objectives}`;
+            })
+            .join('\n\n')}`}
+        />
       </CardFooter>
     </Card>
   );
