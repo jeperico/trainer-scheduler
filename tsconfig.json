@@ -11,6 +11,8 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "estree", "json-schema"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

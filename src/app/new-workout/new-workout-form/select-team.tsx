@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ITeam from '@/interfaces/team';
 import {
   Select,
@@ -11,33 +11,34 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { getTeamsByGender } from '@/provider/api';
-import { UseFormRegister } from 'react-hook-form';
 import IWorkout from '@/interfaces/workout';
 
 interface SelectTeamProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: UseFormRegister<any>;
-  handleSelect: (e: string) => void;
+  name: string;
   editableData?: IWorkout;
+  setSelectedTeam: (team: string) => void;
 }
 
 const SelectTeam: React.FC<SelectTeamProps> = ({
-  register,
-  handleSelect,
   editableData,
+  name,
+  setSelectedTeam,
 }) => {
-  // console.log('SelectTeam: ', editableData);
+  useEffect(() => {
+    if (editableData?.team.id) {
+      setSelectedTeam(editableData.team.id);
+    }
+  }, [editableData]);
+
+  const handle = (team: string) => {
+    setSelectedTeam(team);
+  };
 
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
-      <Label htmlFor="team">Equipe</Label>
-      <Select
-        onValueChange={handleSelect}
-        // defaultValue={editableData?.team.id}
-        value={editableData?.team.id}
-        // {...(editableData && { defaultValue: editableData.team.id })}
-      >
-        <SelectTrigger name="team" register={register}>
+      <Label htmlFor={name}>Equipe</Label>
+      <Select onValueChange={handle}>
+        <SelectTrigger name={name}>
           <SelectValue placeholder="Selecione o time" />
         </SelectTrigger>
         <SelectContent>

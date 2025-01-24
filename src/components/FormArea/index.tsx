@@ -10,6 +10,7 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
+import Link from 'next/link';
 
 interface IFormAreaProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ interface IFormAreaProps {
 const FormArea: React.FC<IFormAreaProps> = ({ children, onSubmit }) => {
   return (
     <main className="w-screen h-screen flex items-center justify-center">
-      <form onSubmit={() => onSubmit}>
+      <form onSubmit={(e) => onSubmit(e)}>
         <Card className="w-[444px]">
           <CardHeader className="flex items-center">
             <CardTitle>Cadastrar Treino</CardTitle>
@@ -30,7 +31,9 @@ const FormArea: React.FC<IFormAreaProps> = ({ children, onSubmit }) => {
           </CardHeader>
           <CardContent>{children}</CardContent>
           <CardFooter className="flex justify-between">
-            <Button variant="outline">Cancel</Button>
+            <Button asChild variant="outline">
+              <Link href={`/`}>Cancel</Link>
+            </Button>
             <Button>Cadastrar</Button>
           </CardFooter>
         </Card>
