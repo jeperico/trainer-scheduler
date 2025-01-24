@@ -11,10 +11,11 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DeleteExercise from './new-workout-form/delete-exercise';
 import SelectTeam from './new-workout-form/select-team';
-import { getWorkoutById } from '@/provider/api';
+import { getTeamById, getTeamByName, getWorkoutById } from '@/provider/api';
 import { useSearchParams } from 'next/navigation';
 import IWorkout from '@/interfaces/workout';
 import formatDate from '@/utils/format-date';
+import { v4 as uuidv4 } from 'uuid';
 
 const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);
@@ -47,6 +48,9 @@ const NewWorkout = () => {
   };
 
   const [editableData, setEditableData] = useState<IWorkout | undefined>();
+  const [selectedTeam, setSelectedTeam] = useState<string | undefined>(
+    editableData?.team.name
+  );
 
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -57,11 +61,33 @@ const NewWorkout = () => {
     if (workout) setExercises(workout.exercises);
   }, [searchParams]);
 
+  const handleSelectedTeam = (team: string) => {
+    setSelectedTeam(team);
+  };
+
+  const handleWorkout = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const workoutData: IWorkout = {
+      id: uuidv4(),
+      team: selectedTeam
+        ? getTeamById(selectedTeam)
+        : getTeamByName('Baby Iniciante'),
+      objective: e.currentTarget.objective.value,
+      date: e.currentTarget.date.value,
+      exercises: exercises,
+    };
+    console.log('Workout data:', workoutData);
+  };
+
   return (
-    <FormArea onSubmit={(e) => e.preventDefault()}>
+    <FormArea onSubmit={handleWorkout}>
       <div className="grid w-full items-center gap-4">
         <div className="flex justify-between gap-4">
-          <SelectTeam {...(editableData && { editableData: editableData })} />
+          <SelectTeam
+            name="team"
+            {...(editableData && { editableData: editableData })}
+            setSelectedTeam={handleSelectedTeam}
+          />
 
           <div className="flex flex-col space-y-1.5">
             <Label htmlFor="date">Dia</Label>

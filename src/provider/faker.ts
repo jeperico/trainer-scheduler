@@ -104,7 +104,7 @@ const workoutData: Array<IWorkout> = [
   },
 ];
 
-console.log('workoutData: ', workoutData);
+// console.log('workoutData: ', workoutData);
 
 const teamData: Array<ITeam> = [
   {

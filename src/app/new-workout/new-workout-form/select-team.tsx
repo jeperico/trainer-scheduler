@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ITeam from '@/interfaces/team';
 import {
   Select,
@@ -14,21 +14,28 @@ import { getTeamsByGender } from '@/provider/api';
 import IWorkout from '@/interfaces/workout';
 
 interface SelectTeamProps {
+  name: string;
   editableData?: IWorkout;
+  setSelectedTeam: (team: string) => void;
 }
 
-const SelectTeam: React.FC<SelectTeamProps> = ({ editableData }) => {
-  // console.log('SelectTeam: ', editableData);
+const SelectTeam: React.FC<SelectTeamProps> = ({
+  editableData,
+  name,
+  setSelectedTeam,
+}) => {
+  useEffect(() => {
+    if (editableData?.team.id) {
+      setSelectedTeam(editableData.team.id);
+    }
+  }, [editableData]);
+  if (editableData) setSelectedTeam(editableData?.team.id);
 
   return (
     <div className="flex flex-col space-y-1.5 flex-1">
-      <Label htmlFor="team">Equipe</Label>
-      <Select
-        // defaultValue={editableData?.team.id}
-        value={editableData?.team.id}
-        // {...(editableData && { defaultValue: editableData.team.id })}
-      >
-        <SelectTrigger name="team">
+      <Label htmlFor={name}>Equipe</Label>
+      <Select onValueChange={setSelectedTeam}>
+        <SelectTrigger name={name}>
           <SelectValue placeholder="Selecione o time" />
         </SelectTrigger>
         <SelectContent>
