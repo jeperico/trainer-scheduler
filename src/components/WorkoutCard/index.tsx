@@ -20,6 +20,17 @@ import Link from 'next/link';
 import formatTime from '@/utils/format-time';
 import formatDay from '@/utils/format-day';
 import IWorkout from '@/interfaces/workout';
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from '@/components/ui/alert-dialog';
+import { AlertDialogHeader, AlertDialogFooter } from '../ui/alert-dialog';
+import { delWorkoutByID } from '@/provider/api';
 
 interface WorkoutCardProps {
   data: IWorkout;
@@ -79,7 +90,28 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
         </Accordion>
       </CardContent>
       <CardFooter className="flex justify-between mt-auto">
-        <Button variant="destructive">Excluir</Button>
+        <AlertDialog>
+          <AlertDialogTrigger>
+            <div className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 h-9 px-4 py-2">
+              Excluir
+            </div>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                exercise and remove your data.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={() => delWorkoutByID(data.id)}>
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         <Button asChild>
           <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>

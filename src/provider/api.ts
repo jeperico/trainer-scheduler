@@ -57,3 +57,16 @@ export const getWorkoutById = (id: string) => {
 
   return workouts.find((workout: IWorkout) => workout.id === id);
 };
+
+export const delWorkoutByID = (id: string) => {
+  console.log('id: ', id);
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const currentData = get('workouts-data');
+    const newData = currentData.filter(
+      (workout: IWorkout) => workout.id !== id
+    );
+
+    localStorage.setItem('workouts-data', JSON.stringify(newData));
+    window.location.reload();
+  }
+};
