@@ -71,7 +71,7 @@ const NewWorkout = () => {
   };
 
   const handleWorkout = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    // e.preventDefault();
     const workoutData: IWorkout = {
       id: uuidv4(),
       team: selectedTeam

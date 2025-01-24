@@ -11,7 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await get('faker-workout-data');
+      const data = await get('workouts-data');
       setworkouts(data);
     };
 
