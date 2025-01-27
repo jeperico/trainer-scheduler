@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Suspense } from "react";
-import "@/styles/global.css";
-import { usePathname } from "next/navigation";
-import Header from "@/layout/Header";
-import FetchData from "@/provider/fetch";
+import React from 'react';
+import { Suspense } from 'react';
+import '@/styles/global.css';
+import { usePathname } from 'next/navigation';
+import Header from '@/layout/Header';
+import FetchData from '@/provider/fetch';
 
 export default function RootLayout({
   children,
@@ -15,17 +15,20 @@ export default function RootLayout({
   const pathname = usePathname();
   FetchData();
   return (
-    <html suppressHydrationWarning lang="en">
+    <html
+      suppressHydrationWarning
+      lang='en'
+    >
       <head />
-      <body className="min-h-screen">
+      <body className='min-h-screen'>
         <Suspense
           fallback={
-            <div className="flex justify-center items-center h-screen">
+            <div className='flex justify-center items-center h-screen'>
               <div>Loading...</div>
             </div>
           }
         >
-          {pathname === "/new-workout" ? null : <Header />}
+          {pathname === '/new-workout' ? null : <Header />}
           {children}
         </Suspense>
       </body>
