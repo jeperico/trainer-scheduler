@@ -46,11 +46,11 @@ const Header = () => {
             filters={[
               "Domingo",
               "Segunda",
-              "Terça",
+              "Terca",
               "Quarta",
               "Quinta",
               "Sexta",
-              "Sábado",
+              "Sabado",
             ].map((day) => {
               return {
                 name: day,

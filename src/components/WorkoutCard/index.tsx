@@ -56,7 +56,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
-        <CardTitle>{`${data.team.name} ${data.team.gender}, ${data.team.polo}`}</CardTitle>
+        <CardTitle>{`${data.team.name}, ${data.team.gender}`}</CardTitle>
         <Separator />
         <CardDescription>
           {`[${formatDay(data.date)}] ${startTime} até ${endTime}.`}

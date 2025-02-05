@@ -3,7 +3,7 @@ const getWeekday = (day: number) => {
     case 0:
       return "segunda";
     case 1:
-      return "terça";
+      return "terca";
     case 2:
       return "quarta";
     case 3:
@@ -11,7 +11,7 @@ const getWeekday = (day: number) => {
     case 4:
       return "sexta";
     case 5:
-      return "sábado";
+      return "sabado";
     case 6:
       return "domingo";
     default:
