@@ -73,10 +73,12 @@ export const getWorkoutsByPolo = (polo: string) => {
 export const getWorkoutsByDay = (day: string) => {
   const workouts = get("workouts-data");
 
+  const newDay = day.toLowerCase();
+
   return workouts.filter(
     (workout: IWorkout) =>
-      workout.team.day[0]?.weekday === day ||
-      workout.team.day[1]?.weekday === day,
+      workout.team.day[0]?.weekday === newDay ||
+      workout.team.day[1]?.weekday === newDay,
   );
 };
 
