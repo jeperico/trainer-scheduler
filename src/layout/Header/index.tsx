@@ -14,7 +14,6 @@ const Header = () => {
           <Link href="/new-workout">Criar novo treino</Link>
         </Button>
         <div className="flex gap-4">
-          <NavMenu title="Gênero" filters={["Masculino", "Feminino"]} />
           <NavMenu
             title="Nome"
             filters={get("teams-data").map((team: ITeam) => team.name)}
