@@ -23,11 +23,6 @@ const Header = () => {
           <NavMenu
             title="Equipe"
             filters={get("teams-data").map((team: ITeam) => {
-              console.log("team: ", team);
-              console.log(
-                "getWorkoutsByTeam(team.name): ",
-                getWorkoutsByTeam(team.name),
-              );
               return {
                 name: team.name,
                 isDisabled: getWorkoutsByTeam(team.name).length === 0,

@@ -24,7 +24,6 @@ const Home = () => {
   const name = searchParams.get("nome");
   const locale = searchParams.get("local");
   const day = searchParams.get("dia-da-semana");
-  console.log(gender, name, locale, day);
 
   const handleFilter = () => {
     let filteredData = workouts;

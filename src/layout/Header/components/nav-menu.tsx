@@ -35,20 +35,13 @@ const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
     <MenubarMenu>
       <MenubarTrigger>{title}</MenubarTrigger>
       <MenubarContent>
-        {filters.map(
-          (filter) => (
-            console.log("SAHNDFUHSDUOHFUOHDUO: ", filter.isDisabled),
-            (
-              <MenubarItem key={filter.name} disabled={filter.isDisabled}>
-                <Link
-                  href={`/?${formatSlug(title)}=${formatSlug(filter.name)}`}
-                >
-                  {filter.name}
-                </Link>
-              </MenubarItem>
-            )
-          ),
-        )}
+        {filters.map((filter) => (
+          <MenubarItem key={filter.name} disabled={filter.isDisabled}>
+            <Link href={`/?${formatSlug(title)}=${formatSlug(filter.name)}`}>
+              {filter.name}
+            </Link>
+          </MenubarItem>
+        ))}
       </MenubarContent>
     </MenubarMenu>
   );

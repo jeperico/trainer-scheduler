@@ -81,7 +81,6 @@ export const getWorkoutsByDay = (day: string) => {
 };
 
 export const delWorkoutByID = (id: string) => {
-  console.log("id: ", id);
   if (typeof window !== "undefined" && window.localStorage) {
     const currentData = get("workouts-data");
     const newData = currentData.filter(
