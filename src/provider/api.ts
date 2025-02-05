@@ -1,5 +1,6 @@
 import ITeam from "@/interfaces/team";
 import IWorkout from "@/interfaces/workout";
+import getWeekday from "@/utils/get-weekday";
 
 export const get = (uri: string) => {
   if (typeof window !== "undefined" && window.localStorage) {
@@ -77,8 +78,7 @@ export const getWorkoutsByDay = (day: string) => {
 
   return workouts.filter(
     (workout: IWorkout) =>
-      workout.team.day[0]?.weekday === newDay ||
-      workout.team.day[1]?.weekday === newDay,
+      getWeekday(new Date(workout.date).getDay()) === newDay,
   );
 };
 
