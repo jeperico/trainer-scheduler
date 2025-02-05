@@ -1,5 +1,6 @@
 const formatDay = (date: Date) => {
   const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + 1);
 
   const day = newDate.getDate();
   const month = newDate.getMonth() + 1;
