@@ -1,14 +1,20 @@
 import React from "react";
 import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-  NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 import formatSlug from "@/utils/format-slug";
-import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 interface NavMenuProps {
   title: string;
@@ -17,26 +23,18 @@ interface NavMenuProps {
 
 const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 w-[420px]">
-              {filters.map((filter) => (
-                <NavigationMenuLink
-                  key={filter}
-                  href={`/?${formatSlug(title)}=${formatSlug(filter)}`}
-                >
-                  {filter}
-                  <Separator />
-                </NavigationMenuLink>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <MenubarMenu>
+      <MenubarTrigger>{title}</MenubarTrigger>
+      <MenubarContent>
+        {filters.map((filter) => (
+          <MenubarItem key={filter}>
+            <Link href={`/?${formatSlug(title)}=${formatSlug(filter)}`}>
+              {filter}
+            </Link>
+          </MenubarItem>
+        ))}
+      </MenubarContent>
+    </MenubarMenu>
   );
 };
 

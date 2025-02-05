@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import React from "react";
+import { Menubar } from "@/components/ui/menubar";
 import NavMenu from "./components/nav-menu";
 import { get } from "@/provider/api";
 import ITeam from "@/interfaces/team";
@@ -13,7 +14,7 @@ const Header = () => {
         <Button asChild className="bg-green-600 text-white hover:bg-green-700">
           <Link href="/new-workout">Criar novo treino</Link>
         </Button>
-        <div className="flex gap-4">
+        <Menubar className="flex gap-4">
           <NavMenu
             title="Nome"
             filters={get("teams-data").map((team: ITeam) => team.name)}
@@ -41,7 +42,7 @@ const Header = () => {
               "Sábado",
             ]}
           />
-        </div>
+        </Menubar>
       </div>
       <Separator className="mt-2" />
     </header>
