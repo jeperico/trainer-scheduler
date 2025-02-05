@@ -1,4 +1,6 @@
 const formatSlug = (slug: string): string => {
+  if (slug === undefined) return "";
+
   return slug
     .replace(/ /g, "-")
     .replace(/[çÇ]/g, "c")

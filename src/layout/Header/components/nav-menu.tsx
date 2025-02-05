@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   MenubarCheckboxItem,
@@ -18,7 +20,14 @@ import Link from "next/link";
 
 interface NavMenuProps {
   title: string;
-  filters: Array<string>;
+  filters: Array<{
+    name: string;
+    isDisabled: boolean;
+  }>;
+  // filters: Array<{
+  //   name: string;
+  //   disable: boolean;
+  // }>;
 }
 
 const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
@@ -26,13 +35,20 @@ const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
     <MenubarMenu>
       <MenubarTrigger>{title}</MenubarTrigger>
       <MenubarContent>
-        {filters.map((filter) => (
-          <MenubarItem key={filter}>
-            <Link href={`/?${formatSlug(title)}=${formatSlug(filter)}`}>
-              {filter}
-            </Link>
-          </MenubarItem>
-        ))}
+        {filters.map(
+          (filter) => (
+            console.log("SAHNDFUHSDUOHFUOHDUO: ", filter.isDisabled),
+            (
+              <MenubarItem key={filter.name} disabled={filter.isDisabled}>
+                <Link
+                  href={`/?${formatSlug(title)}=${formatSlug(filter.name)}`}
+                >
+                  {filter.name}
+                </Link>
+              </MenubarItem>
+            )
+          ),
+        )}
       </MenubarContent>
     </MenubarMenu>
   );

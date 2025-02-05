@@ -58,6 +58,28 @@ export const getWorkoutById = (id: string) => {
   return workouts.find((workout: IWorkout) => workout.id === id);
 };
 
+export const getWorkoutsByTeam = (name: string) => {
+  const workouts = get("workouts-data");
+
+  return workouts.filter((workout: IWorkout) => workout.team.name === name);
+};
+
+export const getWorkoutsByPolo = (polo: string) => {
+  const workouts = get("workouts-data");
+
+  return workouts.filter((workout: IWorkout) => workout.team.polo === polo);
+};
+
+export const getWorkoutsByDay = (day: string) => {
+  const workouts = get("workouts-data");
+
+  return workouts.filter(
+    (workout: IWorkout) =>
+      workout.team.day[0]?.weekday === day ||
+      workout.team.day[1]?.weekday === day,
+  );
+};
+
 export const delWorkoutByID = (id: string) => {
   console.log("id: ", id);
   if (typeof window !== "undefined" && window.localStorage) {

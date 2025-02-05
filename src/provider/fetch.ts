@@ -31,7 +31,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Oficina",
+    polo: "Oficina",
   },
   {
     id: uuidv4(),
@@ -61,7 +61,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Bucarein",
+    polo: "Bucarein",
   },
   {
     id: uuidv4(),
@@ -80,7 +80,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Oficina",
+    polo: "Oficina",
   },
   {
     id: uuidv4(),
@@ -110,7 +110,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Bucarein",
+    polo: "Bucarein",
   },
   {
     id: uuidv4(),
@@ -129,7 +129,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Oficina",
+    polo: "Oficina",
   },
   {
     id: uuidv4(),
@@ -148,7 +148,7 @@ const teamData: Array<ITeam> = [
         },
       },
     ],
-    location: "Atiradores",
+    polo: "Atiradores",
   },
 ];
 

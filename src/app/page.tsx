@@ -41,7 +41,7 @@ const Home = () => {
     }
     if (locale) {
       filteredData = filteredData.filter((data) =>
-        data.team.location.toLowerCase().includes(locale.toLowerCase()),
+        data.team.polo.toLowerCase().includes(locale.toLowerCase()),
       );
     }
     if (day) {
