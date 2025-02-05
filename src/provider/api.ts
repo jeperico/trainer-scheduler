@@ -1,5 +1,6 @@
 import ITeam from "@/interfaces/team";
 import IWorkout from "@/interfaces/workout";
+import getWeekday from "@/utils/get-weekday";
 
 export const get = (uri: string) => {
   if (typeof window !== "undefined" && window.localStorage) {
@@ -58,8 +59,30 @@ export const getWorkoutById = (id: string) => {
   return workouts.find((workout: IWorkout) => workout.id === id);
 };
 
+export const getWorkoutsByTeam = (name: string) => {
+  const workouts = get("workouts-data");
+
+  return workouts.filter((workout: IWorkout) => workout.team.name === name);
+};
+
+export const getWorkoutsByPolo = (polo: string) => {
+  const workouts = get("workouts-data");
+
+  return workouts.filter((workout: IWorkout) => workout.team.polo === polo);
+};
+
+export const getWorkoutsByDay = (day: string) => {
+  const workouts = get("workouts-data");
+
+  const newDay = day.toLowerCase();
+
+  return workouts.filter(
+    (workout: IWorkout) =>
+      getWeekday(new Date(workout.date).getDay()) === newDay,
+  );
+};
+
 export const delWorkoutByID = (id: string) => {
-  console.log("id: ", id);
   if (typeof window !== "undefined" && window.localStorage) {
     const currentData = get("workouts-data");
     const newData = currentData.filter(
