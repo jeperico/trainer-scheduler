@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const teamData: Array<ITeam> = [
   {
     id: uuidv4(),
-    name: "Baby Iniciante",
+    name: "Baby Iniciante Oficina",
     gender: "Feminino",
     day: [
       {
@@ -41,11 +41,11 @@ const teamData: Array<ITeam> = [
       {
         weekday: "terca",
         startTime: {
-          hours: 14,
+          hours: 15,
           minutes: 0,
         },
         endTime: {
-          hours: 15,
+          hours: 16,
           minutes: 0,
         },
       },
@@ -72,11 +72,11 @@ const teamData: Array<ITeam> = [
         weekday: "quarta",
         startTime: {
           hours: 19,
-          minutes: 0,
+          minutes: 30,
         },
         endTime: {
           hours: 20,
-          minutes: 0,
+          minutes: 30,
         },
       },
     ],
@@ -84,7 +84,7 @@ const teamData: Array<ITeam> = [
   },
   {
     id: uuidv4(),
-    name: "Intermediário",
+    name: "Intermediário Bucarein",
     gender: "Feminino",
     day: [
       {
@@ -114,7 +114,7 @@ const teamData: Array<ITeam> = [
   },
   {
     id: uuidv4(),
-    name: "Rendimento",
+    name: "Rendimento Oficina",
     gender: "Feminino",
     day: [
       {
@@ -133,7 +133,7 @@ const teamData: Array<ITeam> = [
   },
   {
     id: uuidv4(),
-    name: "Sub 18",
+    name: "Sub 18 Atiradores",
     gender: "Masculino",
     day: [
       {
