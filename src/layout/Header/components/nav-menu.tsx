@@ -2,17 +2,9 @@
 
 import React from "react";
 import {
-  MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import formatSlug from "@/utils/format-slug";
@@ -24,10 +16,6 @@ interface NavMenuProps {
     name: string;
     isDisabled: boolean;
   }>;
-  // filters: Array<{
-  //   name: string;
-  //   disable: boolean;
-  // }>;
 }
 
 const NavMenu: React.FC<NavMenuProps> = ({ title, filters }) => {
