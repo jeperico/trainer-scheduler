@@ -20,7 +20,7 @@ interface IFormAreaProps {
 
 const FormArea: React.FC<IFormAreaProps> = ({ children, onSubmit }) => {
   return (
-    <main className="w-screen h-screen flex items-center justify-center">
+    <main className="w-[95vw] h-[80vh] flex items-center justify-center">
       <form onSubmit={(e) => onSubmit(e)}>
         <Card className="w-[444px]">
           <CardHeader className="flex items-center">
