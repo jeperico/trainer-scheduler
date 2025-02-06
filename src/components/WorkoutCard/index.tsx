@@ -39,14 +39,14 @@ interface WorkoutCardProps {
 
 const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
   const startTime =
-    data.team.day && data.team.day.length > 0
+    data.team && data.team.day && data.team.day.length > 0
       ? formatTime(
           data.team.day[0].startTime.hours,
           data.team.day[0].startTime.minutes,
         )
       : "00:00";
   const endTime =
-    data.team.day && data.team.day.length > 0
+    data.team && data.team.day && data.team.day.length > 0
       ? formatTime(
           data.team.day[0].endTime.hours,
           data.team.day[0].endTime.minutes,
@@ -56,7 +56,11 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
-        <CardTitle>{`${data.team.name}, ${data.team.gender}`}</CardTitle>
+        {data.team && data.team.name && data.team.gender ? (
+          <CardTitle>{`${data.team.name}, ${data.team.gender}`}</CardTitle>
+        ) : (
+          <CardTitle>Team information not available</CardTitle>
+        )}
         <Separator />
         <CardDescription>
           {`[${formatDay(data.date)}] ${startTime} até ${endTime}.`}
@@ -117,7 +121,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
           <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
         <CopyButton
-          text={`Turma: ${data.team.name} - ${data.date}; \nBairro: ${data.team.polo}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
+          text={`Turma: ${data.team?.name ?? "N/A"} - ${data.date}; \nBairro: ${data.team?.polo ?? "N/A"}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
             .map((exercise: IExercise) => {
               return `${exercise.title} - ${exercise.duration} minutos \n${exercise.description}\n${exercise.objectives}`;
             })

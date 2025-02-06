@@ -62,13 +62,17 @@ export const getWorkoutById = (id: string) => {
 export const getWorkoutsByTeam = (name: string) => {
   const workouts = get("workouts-data");
 
-  return workouts.filter((workout: IWorkout) => workout.team.name === name);
+  return workouts.filter(
+    (workout: IWorkout) => workout.team && workout.team.name === name,
+  );
 };
 
 export const getWorkoutsByPolo = (polo: string) => {
   const workouts = get("workouts-data");
 
-  return workouts.filter((workout: IWorkout) => workout.team.polo === polo);
+  return workouts.filter(
+    (workout: IWorkout) => workout.team && workout.team.polo === polo,
+  );
 };
 
 export const getWorkoutsByDay = (day: string) => {
