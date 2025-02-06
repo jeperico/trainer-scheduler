@@ -12,5 +12,5 @@ export default interface ITeam {
     startTime: Time;
     endTime: Time;
   }>;
-  location: Locale;
+  polo: Locale;
 }

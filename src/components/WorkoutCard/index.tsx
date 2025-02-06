@@ -56,7 +56,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
-        <CardTitle>{`${data.team.name} ${data.team.gender}, ${data.team.location}`}</CardTitle>
+        <CardTitle>{`${data.team.name}, ${data.team.gender}`}</CardTitle>
         <Separator />
         <CardDescription>
           {`[${formatDay(data.date)}] ${startTime} até ${endTime}.`}
@@ -117,7 +117,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
           <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
         <CopyButton
-          text={`Turma: ${data.team.name} - ${data.date}; \nBairro: ${data.team.location}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
+          text={`Turma: ${data.team.name} - ${data.date}; \nBairro: ${data.team.polo}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
             .map((exercise: IExercise) => {
               return `${exercise.title} - ${exercise.duration} minutos \n${exercise.description}\n${exercise.objectives}`;
             })

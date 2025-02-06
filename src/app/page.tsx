@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { get } from "@/provider/api";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import getWeekday from "@/utils/get-weekday";
+import formatSlug from "@/utils/format-slug";
 
 const Home = () => {
   const [workouts, setworkouts] = useState<IWorkout[]>([]);
@@ -20,35 +22,28 @@ const Home = () => {
   }, []);
 
   const searchParams = useSearchParams();
-  const gender = searchParams.get("genero");
-  const name = searchParams.get("nome");
-  const locale = searchParams.get("local");
+  const team = searchParams.get("equipe");
+  const polo = searchParams.get("polo");
   const day = searchParams.get("dia-da-semana");
-  console.log(gender, name, locale, day);
 
   const handleFilter = () => {
     let filteredData = workouts;
 
-    if (gender) {
-      filteredData = filteredData.filter((data) =>
-        data.team.gender.toLowerCase().includes(gender.toLowerCase()),
-      );
+    if (team) {
+      filteredData = filteredData.filter((data) => {
+        return formatSlug(data.team.name.toLowerCase()).includes(
+          team.toLowerCase(),
+        );
+      });
     }
-    if (name) {
+    if (polo) {
       filteredData = filteredData.filter((data) =>
-        data.team.name.toLowerCase().includes(name.toLowerCase()),
-      );
-    }
-    if (locale) {
-      filteredData = filteredData.filter((data) =>
-        data.team.location.toLowerCase().includes(locale.toLowerCase()),
+        data.team.polo.toLowerCase().includes(polo.toLowerCase()),
       );
     }
     if (day) {
       filteredData = filteredData.filter(
-        (data) =>
-          data.team.day[0]?.weekday.includes(day) ||
-          data.team.day[1]?.weekday.includes(day),
+        (data) => getWeekday(new Date(data.date).getDay()) === day,
       );
     }
 

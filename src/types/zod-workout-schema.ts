@@ -22,7 +22,7 @@ const workoutSchema = z.object({
         endTime: z.string(),
       }),
     ),
-    location: z.enum([
+    polo: z.enum([
       "Guanabara",
       "Comasa",
       "Centro",
