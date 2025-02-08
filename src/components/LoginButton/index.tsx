@@ -1,26 +1,21 @@
 import React from "react";
-import { GoogleLogin } from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
-const clientID = process.env.CLIENT_ID || "";
+const clientID = process.env.NEXT_PUBLIC_CLIENT_ID || "";
 
 const LoginButton = () => {
   const onSuccess = (res: any) => {
     console.log("Current User:", res.profileObj);
     console.log(res);
   };
-  const onFailure = (res: any) => {
-    console.log("Login failed:", res);
+  const onFailure = () => {
+    console.log("Login failed:");
   };
 
   return (
-    <GoogleLogin
-      clientId={clientID}
-      buttonText="Login"
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-      cookiePolicy={"single_host_origin"}
-      isSignedIn={true}
-    />
+    <GoogleOAuthProvider clientId={clientID}>
+      <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
+    </GoogleOAuthProvider>
   );
 };
 
