@@ -1,7 +1,7 @@
 import React from "react";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
-const clientID = process.env.NEXT_PUBLIC_CLIENT_ID || "";
+const clientID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 const LoginButton = () => {
   const onSuccess = (res: any) => {
@@ -12,10 +12,12 @@ const LoginButton = () => {
     console.log("Login failed:");
   };
 
-  return (
+  return clientID ? (
     <GoogleOAuthProvider clientId={clientID}>
       <GoogleLogin onSuccess={onSuccess} onError={onFailure} />
     </GoogleOAuthProvider>
+  ) : (
+    <></>
   );
 };
 
