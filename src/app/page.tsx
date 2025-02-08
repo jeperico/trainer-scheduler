@@ -31,14 +31,17 @@ const Home = () => {
 
     if (team) {
       filteredData = filteredData.filter((data) => {
-        return formatSlug(data.team.name.toLowerCase()).includes(
-          team.toLowerCase(),
+        return (
+          data.team &&
+          formatSlug(data.team.name.toLowerCase()).includes(team.toLowerCase())
         );
       });
     }
     if (polo) {
-      filteredData = filteredData.filter((data) =>
-        data.team.polo.toLowerCase().includes(polo.toLowerCase()),
+      filteredData = filteredData.filter(
+        (data) =>
+          data.team &&
+          data.team.polo.toLowerCase().includes(polo.toLowerCase()),
       );
     }
     if (day) {
