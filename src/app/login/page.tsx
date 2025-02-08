@@ -11,7 +11,7 @@ const Login = async () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
+    <main className="min-h-screen flex justify-center items-center bg-gray-100">
       <Card className="max-w-md w-full shadow-lg">
         <CardHeader>
           <h2 className="text-2xl font-semibold text-center text-gray-800">
@@ -25,7 +25,7 @@ const Login = async () => {
           <LoginButton />
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };
 
