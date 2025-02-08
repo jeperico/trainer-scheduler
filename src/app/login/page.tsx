@@ -1,13 +1,6 @@
-import LoginButton from "@/components/LoginButton";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import LoginButton from "./login-button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { getServerSession } from "next-auth";
-import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import React from "react";
 
