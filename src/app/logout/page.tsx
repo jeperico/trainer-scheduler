@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Batata from "./btn";
 
-const Teste = async () => {
+const Logout = async () => {
   const session = await getServerSession();
 
   if (!session) {
@@ -20,4 +20,4 @@ const Teste = async () => {
   );
 };
 
-export default Teste;
+export default Logout;

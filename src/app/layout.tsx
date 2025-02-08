@@ -25,7 +25,7 @@ export default function RootLayout({
             </div>
           }
         >
-          <Header />
+          {pathname !== "/login" && <Header />}
           {children}
         </Suspense>
       </body>
