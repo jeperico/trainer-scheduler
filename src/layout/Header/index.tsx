@@ -4,14 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { Menubar } from "@/components/ui/menubar";
 import NavMenu from "./components/nav-menu";
-import {
-  get,
-  getWorkoutsByDay,
-  getWorkoutsByPolo,
-  getWorkoutsByTeam,
-} from "@/provider/api";
 import ITeam from "@/interfaces/team";
 import { usePathname } from "next/navigation";
+import getWorkoutsByDay from "@/services/workout/getWorkoutsByDay";
+import getWorkoutsByPolo from "@/services/workout/getWorkoutsByPolo";
+import getWorkoutsByTeam from "@/services/workout/getWorkoutsByTeam";
+import { get } from "http";
 
 const Header = () => {
   const pathname = usePathname();

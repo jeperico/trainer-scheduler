@@ -30,8 +30,8 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { AlertDialogHeader, AlertDialogFooter } from "../ui/alert-dialog";
-import { delWorkoutByID } from "@/provider/api";
 import CopyButton from "../CopyButton";
+import delWorkoutByID from "@/services/workout/delWorkoutByID";
 
 interface WorkoutCardProps {
   data: IWorkout;
