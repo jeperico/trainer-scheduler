@@ -11,18 +11,13 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DeleteExercise from "./new-workout-form/delete-exercise";
 import SelectTeam from "./new-workout-form/select-team";
-import {
-  del,
-  get,
-  getTeamById,
-  getTeamByName,
-  getWorkoutById,
-  post,
-} from "@/provider/api";
+import { del, get, getWorkoutById, post } from "@/provider/api";
 import { useSearchParams } from "next/navigation";
 import IWorkout from "@/interfaces/workout";
 import formatDate from "@/utils/format-date";
 import { v4 as uuidv4 } from "uuid";
+import getTeamById from "@/services/team/getTeamById";
+import getTeamByName from "@/services/team/getTeamByName";
 
 const NewWorkout = () => {
   const [exercises, setExercises] = useState<IExercise[]>([]);

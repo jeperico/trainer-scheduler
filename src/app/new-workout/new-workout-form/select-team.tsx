@@ -10,8 +10,8 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { getTeamsByGender } from "@/provider/api";
 import IWorkout from "@/interfaces/workout";
+import getTeamsByGender from "@/services/team/getTeamsByGender";
 
 interface SelectTeamProps {
   name: string;

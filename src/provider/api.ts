@@ -35,24 +35,6 @@ export const del = (uri: string) => {
   }
 };
 
-export const getTeamByName = (name: string) => {
-  const teams = get("teams-data");
-
-  return teams.find((team: ITeam) => team.name === name);
-};
-
-export const getTeamById = (id: string) => {
-  const teams = get("teams-data");
-
-  return teams.find((team: ITeam) => team.id === id);
-};
-
-export const getTeamsByGender = (gender: string) => {
-  const teams = get("teams-data");
-
-  return teams.filter((team: ITeam) => team.gender === gender);
-};
-
 export const getWorkoutById = (id: string) => {
   const workouts = get("workouts-data");
 
