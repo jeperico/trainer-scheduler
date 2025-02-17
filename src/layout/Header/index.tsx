@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import getWorkoutsByDay from "@/services/workout/getWorkoutsByDay";
 import getWorkoutsByPolo from "@/services/workout/getWorkoutsByPolo";
 import getWorkoutsByTeam from "@/services/workout/getWorkoutsByTeam";
-import { get } from "http";
+import { get } from "@/provider/api";
 
 const Header = () => {
   const pathname = usePathname();
@@ -17,17 +17,11 @@ const Header = () => {
     <header className="mx-auto w-[90vw] max-w-[1240px] my-4">
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button
-            asChild
-            className="bg-green-600 text-white hover:bg-green-700"
-          >
-            <Link href="/">Voltar ao Início</Link>
-          </Button>
-          <Button
-            asChild
-            className="bg-green-600 text-white hover:bg-green-700"
-          >
+          <Button asChild>
             <Link href="/new-workout">Criar novo treino</Link>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link href="/">Voltar ao Início</Link>
           </Button>
         </div>
         {pathname === "/new-workout" ? null : (

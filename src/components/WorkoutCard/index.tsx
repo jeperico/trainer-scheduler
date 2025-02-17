@@ -32,6 +32,7 @@ import {
 import { AlertDialogHeader, AlertDialogFooter } from "../ui/alert-dialog";
 import CopyButton from "../CopyButton";
 import delWorkoutByID from "@/services/workout/delWorkoutByID";
+import ExportButton from "../ExportButton";
 
 interface WorkoutCardProps {
   data: IWorkout;
@@ -120,13 +121,14 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ data }) => {
         <Button asChild>
           <Link href={`/new-workout?id=${data.id}`}>Editar</Link>
         </Button>
-        <CopyButton
+        {/* <CopyButton
           text={`Turma: ${data.team?.name ?? "N/A"} - ${data.date}; \nBairro: ${data.team?.polo ?? "N/A"}; \nObjetivo do treino: ${data.objective} \n\nExercícios: \n${data.exercises
             .map((exercise: IExercise) => {
               return `${exercise.title} - ${exercise.duration} minutos \n${exercise.description}\n${exercise.objectives}`;
             })
             .join("\n\n")}`}
-        />
+        /> */}
+        <ExportButton data={data} />
       </CardFooter>
     </Card>
   );
