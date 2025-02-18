@@ -1,7 +1,16 @@
 import IWorkout from "@/interfaces/workout";
 import { get } from "@/provider/api";
 
-const getWorkoutsByTeam = (name: string) => {
+/**
+ * Get the workout data using team
+ *
+ * @param {string} name - The team name
+ * @return {Array<IWorkout>} - The workout data
+ * @example
+ * const workouts = getWorkoutsByTeam("example");
+ */
+
+const getWorkoutsByTeam = (name: string): Array<IWorkout> => {
   const workouts = get("workouts-data");
 
   return workouts.filter(

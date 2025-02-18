@@ -1,6 +1,14 @@
 import IWorkout from "@/interfaces/workout";
 import { get } from "@/provider/api";
 
+/**
+ * Delete the workout data using id
+ *
+ * @param {string} id - The workout id
+ * @example
+ * delWorkoutByID("uuid_example");
+ */
+
 export const delWorkoutByID = (id: string) => {
   if (typeof window !== "undefined" && window.localStorage) {
     const currentData = get("workouts-data");
