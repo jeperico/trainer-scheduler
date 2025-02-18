@@ -1,20 +1,15 @@
-"use client";
+import React from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import Export from "./export";
 
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import getWorkoutById from "@/services/workout/getWorkoutById";
-import IWorkout from "@/interfaces/workout";
+const NewWorkout = async () => {
+  const session = await getServerSession();
+  if (!session) {
+    return redirect("/login");
+  }
 
-const NewWorkout = () => {
-  const [workout, setWorkout] = useState<IWorkout | undefined>();
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    const id = searchParams.get("id");
-    if (!id) return;
-    setWorkout(getWorkoutById(id));
-  }, [searchParams]);
-
-  return <p>{workout?.id}</p>;
+  return <Export />;
 };
 
 export default NewWorkout;
