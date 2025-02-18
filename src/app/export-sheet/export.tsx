@@ -1,10 +1,10 @@
 // "use client";
 
 import React from "react";
+import create from "@/services/sheets/create";
 // import getWorkoutById from "@/services/workout/getWorkoutById";
 // import { useSearchParams } from "next/navigation";
 // import IWorkout from "@/interfaces/workout";
-import create from "@/services/sheets/create";
 
 const Export = () => {
   // const [workout, setWorkout] = useState<IWorkout | undefined>();
@@ -16,7 +16,7 @@ const Export = () => {
   // }, [searchParams]);
 
   const handleCreate = async () => {
-    create("MIGUIEL");
+    create("MIGUIELS").catch(console.error);
   };
 
   handleCreate();

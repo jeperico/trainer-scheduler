@@ -31,7 +31,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "tailwind.config.js",
-    "postcss.config.js"
+    "postcss.config.js",
+    "src/services/sheets/auth.js"
   ],
   "exclude": ["node_modules"]
 }
