@@ -1,3 +1,13 @@
+/**
+ * @description Format a slug to a string
+ * @module utils/format-slug
+ *
+ * @param {string} slug - Slug to format
+ * @returns {string} Formatted slug
+ * @example
+ * formatSlug('Hello World') // 'hello-world'
+ */
+
 const formatSlug = (slug: string): string => {
   if (slug === undefined) return "";
 

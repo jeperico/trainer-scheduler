@@ -1,4 +1,14 @@
-const getWeekday = (day: number) => {
+/**
+ * @description Get the weekday name from a number
+ * @module utils/get-weekday
+ *
+ * @param {number} day - Number of the day
+ * @returns {string} Weekday name
+ * @example
+ * getWeekday(0) // 'segunda'
+ */
+
+const getWeekday = (day: number): string => {
   switch (day) {
     case 0:
       return "segunda";
