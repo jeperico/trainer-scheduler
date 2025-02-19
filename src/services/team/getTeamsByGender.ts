@@ -2,7 +2,8 @@ import ITeam from "@/interfaces/team";
 import { get } from "@/provider/api";
 
 /**
- * Get the team data using gender
+ * @description Get the team data using gender
+ * @module services/team/getTeamsByGender
  *
  * @param {string} gender - The team gender
  * @return {Array<ITeam>} - The team data

@@ -2,10 +2,14 @@ import { google } from "googleapis";
 import authorize from "./authorize";
 
 /**
- * Create a google spreadsheet
+ * @description Create a google spreadsheet
+ * @module services/sheets/create
+ *
  * @param {string} title Spreadsheets title
  * @return {Promise<string>} Created spreadsheets ID
  * @async
+ * @example
+ * create("title_example").catch(console.error);
  */
 
 const create = async (title: string): Promise<string> => {

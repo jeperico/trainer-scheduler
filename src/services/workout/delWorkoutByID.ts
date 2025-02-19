@@ -2,7 +2,8 @@ import IWorkout from "@/interfaces/workout";
 import { get } from "@/provider/api";
 
 /**
- * Delete the workout data using id
+ * @description Delete the workout data using id
+ * @module services/workout/delWorkoutByID
  *
  * @param {string} id - The workout id
  * @example

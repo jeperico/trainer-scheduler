@@ -2,7 +2,8 @@ import IWorkout from "@/interfaces/workout";
 import { get } from "@/provider/api";
 
 /**
- * Get the workout data using team
+ * @description Get the workout data using team
+ * @module services/workout/getWorkoutsByTeam
  *
  * @param {string} name - The team name
  * @return {Array<IWorkout>} - The workout data

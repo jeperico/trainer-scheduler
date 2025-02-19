@@ -2,7 +2,8 @@ import IWorkout from "@/interfaces/workout";
 import { get } from "@/provider/api";
 
 /**
- * Get the workout data using polo
+ * @description Get the workout data using polo
+ * @module services/workout/getWorkoutsByPolo
  *
  * @param {string} polo - The workout polo
  * @return {Array<IWorkout>} - The workout data

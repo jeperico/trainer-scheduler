@@ -10,7 +10,8 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
 const CREDENTIALS_PATH = path.resolve("config/credentials.json");
 
 /**
- * Load or request or authorization to call APIs.
+ * @description Load or request or authorization to call APIs.
+ * @module services/sheets/authorize
  *
  * @return {Promise<OAuth2Client>}
  * @async

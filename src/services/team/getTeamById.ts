@@ -2,7 +2,8 @@ import ITeam from "@/interfaces/team";
 import { get } from "@/provider/api";
 
 /**
- * Get the team data using id
+ * @description Get the team data using id
+ * @module services/team/getTeamById
  *
  * @param {string} id - The team id
  * @return {ITeam} - The team data

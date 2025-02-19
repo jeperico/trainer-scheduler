@@ -1,4 +1,14 @@
-const formatDate = (date: Date) => {
+/**
+ * @description Format date to YYYY-MM-DD
+ * @module utils/format-date
+ *
+ * @param {Date} date - Date to format
+ * @returns {string} Formatted date
+ * @example
+ * formatDate(new Date('2021-01-01')) // '2021-01-01'
+ */
+
+const formatDate = (date: Date): string => {
   const newDate = new Date(date);
 
   const day = newDate.getDate();

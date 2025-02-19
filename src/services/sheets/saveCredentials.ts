@@ -7,7 +7,8 @@ const TOKEN_PATH = path.join(process.cwd(), "config/token.json");
 const CREDENTIALS_PATH = path.join(process.cwd(), "config/credentials.json");
 
 /**
- * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
+ * @description Serializes credentials to a file compatible with GoogleAuth.fromJSON.
+ * @module services/sheets/saveCredentials
  *
  * @param {OAuth2Client} client
  * @return {Promise<void>}

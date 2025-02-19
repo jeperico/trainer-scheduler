@@ -3,7 +3,8 @@ import { get } from "@/provider/api";
 import getWeekday from "@/utils/get-weekday";
 
 /**
- * Get the workout data using day
+ * @description Get the workout data using day
+ * @module services/workout/getWorkoutsByDay
  *
  * @param {string} day - The workout day
  * @return {Array<IWorkout>} - The workout data

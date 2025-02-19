@@ -6,7 +6,8 @@ import { OAuth2Client } from "google-auth-library";
 const TOKEN_PATH = path.join(process.cwd(), "config/token.json");
 
 /**
- * Reads previously authorized credentials from the save file.
+ * @description Reads previously authorized credentials from the save file.
+ * @module services/sheets/loadSavedCredentialsIfExist
  *
  * @return {Promise<OAuth2Client|null>}
  * @async
