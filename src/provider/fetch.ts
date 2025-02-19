@@ -152,7 +152,18 @@ const teamData: Array<ITeam> = [
   },
 ];
 
-const FetchData = () => {
+/**
+ * @description Fetches data from the API and stores it in the local storage
+ * @module provider/fetch
+ *
+ * @import FetchData from "@/provider/fetch"
+ * @returns {void}
+ *
+ * @example
+ * FetchData();
+ */
+
+const FetchData = (): void => {
   if (get("teams-data").length !== 0) return;
   teamData.forEach((team) => post("teams-data", team));
 };
